@@ -51,3 +51,9 @@ etc/*
 !etc/malarkey/*
 ```
 
+Git Pull/Fetch/Merge
+--------------------
+
+- pull -> fetch + merge
+- fetch -> retrieve from a remote and store in *<remote name>/<branch name>* branch
+- merge -> merge two branches
