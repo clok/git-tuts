@@ -2,7 +2,7 @@
 Git Basics
 ==========
 
-Config File (*.gitconfig*)
+Config File (.gitconfig)
 --------------------------
 This is the basic config file that is globally set from the users home directory. (ex. /home/user/.gitconfig)
 
@@ -28,8 +28,8 @@ Sample:
 	editor = emacs -nw
 ```
 
-Git Ingnore (*.gitignore*)
---------------------------
+Git Ignore (.gitignore)
+-------------------------
 Include file extenstions, names and negations. You can set a global level ignore file in your *.gitconfig* and you can include a repo level *.gitignore* at the root of the repository.
 
 Sample:
