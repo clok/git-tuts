@@ -5,6 +5,18 @@ Git Init
 --------
 Git manages a repo from the root directory down. To initialize a new repo, simply use ```git init```.  This will initialize a bare git repo in the directory. Any global configurations you have set will be applied to the newly initialized repo.
 
+Git Status
+----------
+
+
+Git Add/Rm
+----------
+
+
+Git Commit
+----------
+
+
 Git Clone
 ---------
 ```git clone <path to repo>``` is Similar in function to the ```svn checkout```, but it copy the repo to a local dir and will only commit to that local clone.  In order to commit local changes to the remote remote you cloned, you must perform a **push**.
