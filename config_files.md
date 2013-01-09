@@ -51,3 +51,31 @@ etc/*
 ```
 
 Note that if a file is commited to the repo and then it is added to the ignore list, git will continue to track it. If you want to remove it from tracking use ```git rm <file name>``` to remove the file from the repo and commit the changes.
+
+Submodules (.gitmodules)
+------------------------
+This is a file that will be generated when *submodules* are added to your repo. You can also create the file by hand to add/manage the submodules you would like to use for a repo.
+
+```git
+[submodule "coffee-mode"]
+	path = coffee-mode
+	url = git://github.com/defunkt/coffee-mode.git
+[submodule "scss-mode"]
+	path = scss-mode
+	url = git://github.com/antonj/scss-mode.git
+[submodule "json-mode"]
+	path = json-mode
+	url = git://github.com/chad3814/json-mode.git
+[submodule "yaml-mode"]
+	path = yaml-mode
+	url = git://github.com/yoshiki/yaml-mode.git
+[submodule "less-mode"]
+	path = less-mode
+	url = git://github.com/myfreeweb/less-mode.git
+[submodule "enhanced-ruby-mode"]
+	path = enhanced-ruby-mode
+	url = git://github.com/jacott/Enhanced-Ruby-Mode.git
+[submodule "markdown-mode"]
+	path = markdown-mode
+	url = git://github.com/defunkt/markdown-mode.git
+```
