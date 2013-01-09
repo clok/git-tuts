@@ -32,7 +32,6 @@ Git Checkout
 ------------
 - ```git checkout <branch name>``` will checkout a previously created branch.
 - ```git checkout -B <branch name>``` will create and checkout a newly named branch.
-- ```git checout --detach <branch_name``` will checkout a named branch (at the commit level) in a detatched state that is useful for inspection and experimentation. This will not have the ability to merge back into the repo unless the detatched HEAD is renamed as a new branch.
 - ```git checkout -- <file name>``` will discard any uncommited modifications and move the file back to the HEAD.
 
 Git Merge
