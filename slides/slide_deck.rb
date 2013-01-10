@@ -517,8 +517,8 @@ section "... More Advanced Fun ..." do
   EOS
 
   slide <<-EOS, :block
-    \e[1detached Checkout
-    ----------------\e[0m
+    \e[1mDetached Checkout
+    -----------------\e[0m
     Checkout a named branch in a detached state.
 
     Will not have the ability to commit back to the repo unless given a name.
