@@ -3,7 +3,7 @@ Git Related Links
 
 The Dox
 -------
-- My goto for info on git commands: [http://git-scm.com/documentation](http://git-scm.com/documentation)
+- My go to for info on git commands: [http://git-scm.com/documentation](http://git-scm.com/documentation)
 - The [man pages](http://www.kernel.org/pub/software/scm/git/docs/)
 
 Tutorials
@@ -27,12 +27,12 @@ Helper Script
 Tools
 -----
 - [github](https://github.com/) Get on it! Be a social coder.
-- [gitk](http://www.kernel.org/pub/software/scm/git/docs/gitk.html) Default management GUI for *NIX systems. Should be installed by defualt.
+- [gitk](http://www.kernel.org/pub/software/scm/git/docs/gitk.html) Default management GUI for *NIX systems. Should be installed by default.
 - [SourceTree](http://www.sourcetreeapp.com/) A fancier *gitk* from Atlassian for Mac that will help manage svn and git repos.
 - [Git Extensions](http://code.google.com/p/gitextensions/) A git management GUI for Windows.
 - [git-cola](http://git-cola.github.com/) A GUI for Linux, Mac and Windows.
 - [A general list of GUIs](http://git-scm.com/downloads/guis)
 
-Workflows
----------
+Work-flows
+----------
 - [gitflow](http://nvie.com/posts/a-successful-git-branching-model/)
