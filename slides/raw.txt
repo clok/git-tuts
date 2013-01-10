@@ -1,17 +1,17 @@
 
-Git 101: An Introduction to Git
+  Git 101: An Introduction to Git
 
 
-Derek Smith
-@clok, @derek-smith
+  Derek Smith
+  @clok, @derek-smith
 
-Oversee.net
+  Oversee.net
 
-It is easy to shoot your foot off with git,
-but also easy to revert to a previous foot
-and merge it with your current leg.
+  It is easy to shoot your foot off with git,
+  but also easy to revert to a previous foot
+  and merge it with your current leg.
 
-- Jack William Bell
+  - Jack William Bell
 
 =========================
 Basic Configuration Files
@@ -36,19 +36,19 @@ Derek Smith
     
 $:~/> cat .gitconfig
 [user]
-name = Derek Smith
-email = dsmith@oversee.net
+   name = Derek Smith
+   email = dsmith@oversee.net
     
 $:~/>
 
 My typical .gitconfig
     
 [user]
-name = Derek Smith
-email = dsmith@oversee.net
+   name = Derek Smith
+   email = dsmith@oversee.net
 [core]
-excludesFile = /home/dsmith/.gitignore_global
-editor = emacs -nw
+   excludesFile = /home/dsmith/.gitignore_global
+   editor = emacs -nw
     
 
 Git Ignore (.gitignore)
@@ -198,8 +198,8 @@ $:~/my_repo/> git status
     
 $:~/my_repo/> git commit -m "Removed file_to_delete from repo"
 [master 40f4fd4] Removed file_to_delete from repo
-1 file changed, 1 deletion(-)
-delete mode 100644 file_to_delete
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 file_to_delete
     
 $:~/my_repo/> ls
 hello_git.txt
@@ -217,15 +217,15 @@ $:~/my_repo/> git branch features
     
 # List all local branches
 $:~/my_repo/> git branch
-feature
+  feature
 * master
 
 # List all remote branches
 $:~/dev/malarkey> git branch -r
-github.corp/master
-github.corp/v4
-origin/master
-origin/v4
+  github.corp/master
+  github.corp/v4
+  origin/master
+  origin/v4
 
 
 Git Checkout
@@ -313,16 +313,16 @@ Use '--no-ff' to have a merge commit created.
 # Perform the fetch 
 $:~/github/redis/> git fetch origin unstable
 From git://github.com/antirez/redis
-* branch            unstable   -> FETCH_HEAD
+ * branch            unstable   -> FETCH_HEAD
 
 # Then merge the fetched code
 $:~/github/redis/> git merge origin/unstable
 Updating be6cbd3..d7740fc
 Fast-forward
-CONTRIBUTING                                                   |    7 ++
-COPYING                                                        |    2 +-
+ CONTRIBUTING                                                   |    7 ++
+ COPYING                                                        |    2 +-
 ...
-utils/install_server.sh                                        |    2 +
+ utils/install_server.sh                                        |    2 +
 132 files changed, 4403 insertions(+), 1007 deletions(-)
 
 Git Pull
@@ -338,11 +338,11 @@ remote: Compressing objects: 100% (5/5), done.
 remote: Total 7 (delta 4), reused 5 (delta 2)
 Unpacking objects: 100% (7/7), done.
 From git://github.com/antirez/redis
-776d987..a785986  master     -> origin/unstable
+   776d987..a785986  master     -> origin/unstable
 Updating 776d987..a785986
 Fast-forward
-README.markdown |   28 ++++++++++++++++++++++++++++
-1 file changed, 28 insertions(+)
+ README.markdown |   28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
 Git Push
 --------
@@ -358,7 +358,7 @@ Compressing objects: 100% (5/5), done.
 Writing objects: 100% (5/5), 4.00 KiB, done.
 Total 5 (delta 3), reused 0 (delta 0)
 To git@github.com:clok/git-tuts.git
-20f47b7..9b404fb  master -> master
+   20f47b7..9b404fb  master -> master
 
 =========================
 ... More Advanced Fun ...
@@ -373,7 +373,7 @@ Preferable method for sharing a codebase among multiple developers.
 git clone --bare <path to repo>
 
 
-# 
+# Create a bare repository
 $:~/> git clone --bare /home/my/codebase/ /remote/repos/codebase.git
 
 Submodules
@@ -464,7 +464,7 @@ state without impacting any branches by performing another checkout.
 If you want to create a new branch to retain commits you create, you may
 do so (now or later) by using -b with the checkout command again. Example:
 
-git checkout -b new_branch_name
+  git checkout -b new_branch_name
 
 HEAD is now at f14c2d8... Added analytics_table.pl build scripts
 

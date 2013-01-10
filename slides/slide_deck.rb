@@ -434,7 +434,7 @@ section "... More Advanced Fun ..." do
   EOS
 
   slide <<-EOS, :block
-    # 
+    # Create a bare repository
     $:~/>\e[1m git clone --bare /home/my/codebase/ /remote/repos/codebase.git\e[0m
   EOS
 
@@ -498,7 +498,7 @@ section "... More Advanced Fun ..." do
     changes. 
 
     The stash hash can be accessed at anytime within git and will always be
-     there unless you drop the stash.
+    there unless you drop the stash.
   EOS
 
   slide <<-EOS, :block
