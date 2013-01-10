@@ -11,8 +11,8 @@ Tutorials
 - Good list of common examples: [Everyday Git](http://schacon.github.com/git/everyday.html)
 - [Git Magic](http://www-cs-students.stanford.edu/~blynn/gitmagic/index.html)
 
-Screen Cast
------------
+Tutorial Screen Cast
+--------------------
 - [PLAYterm: git demo](http://playterm.org/r/simple-git-demo-1323881492)
 
 Sample Repos
@@ -33,3 +33,6 @@ Tools
 - [git-cola](http://git-cola.github.com/) A GUI for Linux, Mac and Windows.
 - [A general list of GUIs](http://git-scm.com/downloads/guis)
 
+Workflows
+---------
+- [gitflow](http://nvie.com/posts/a-successful-git-branching-model/)

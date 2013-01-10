@@ -3,7 +3,7 @@ Git Basics
 
 Git Init
 --------
-Git manages a repo from the root directory down. To initialize a new repo, simply use ```git init```.  This will initialize a bare git repo in the directory. Any global configurations you have set will be applied to the newly initialized repo.
+Git manages a repo from the root directory down. To initialize a new repo, simply use ```git init```.  This will initialize a new git repo in the directory. Any global configurations you have set will be applied to the newly initialized repo.
 
 Git Status
 ----------
