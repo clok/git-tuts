@@ -305,6 +305,32 @@ section "Now to bring the fun ..." do
   EOS
 
   slide <<-EOS, :block
+    \e[1mGit Remote
+    ----------\e[0m
+    The next essential git command.
+
+    Remote allows you to add and remove remote repo paths.
+
+    Essential for synchronizing multiple machines and repos.
+
+  EOS
+
+  slide <<-EOS, :block
+    # Add a new remote repo
+    $:~/github.corp/git-demo/>\e[1m git remote add github git@github.com:clok/git-tuts.git\e[0m
+
+    # List all remote linked repos
+    $:~/github.corp/git-demo/>\e[1m git remote -v\e[0m
+    github	git@github.com:clok/git-tuts.git (fetch)
+    github	git@github.com:clok/git-tuts.git (push)
+    origin	dsmith@dsmith.dev.corp.oversee.net:~/repos/git-demo.git (fetch)
+    origin	dsmith@dsmith.dev.corp.oversee.net:~/repos/git-demo.git (push)
+
+    # Remove a remote repo link
+    $:~/github.corp/git-demo/>\e[1m git remote rm github\e[0m
+  EOS
+
+  slide <<-EOS, :block
     \e[1mGit Fetch
     ---------\e[0m
     Check and retrieve an update from a remote repo and branch.
@@ -383,11 +409,35 @@ section "Now to bring the fun ..." do
   EOS
 
   slide <<-EOS, :block
-    
+    # Perform the push
+    $:~/github/git-demo/>\e[1m git push github master\e[0m
+    Counting objects: 8, done.
+    Delta compression using up to 8 threads.
+    Compressing objects: 100% (5/5), done.
+    Writing objects: 100% (5/5), 4.00 KiB, done.
+    Total 5 (delta 3), reused 0 (delta 0)
+    To git@github.com:clok/git-tuts.git
+       20f47b7..9b404fb  master -> master
   EOS
 end
 
 section "... More Advanced Fun ..." do
+  slide <<-EOS, :block
+    \e[1mBare Clone Repositroy
+    ---------------------\e[0m
+    Makes a publishable form of a repo.
+
+    Preferable method for sharing a codebase among multiple developers.
+
+    \e[1mgit clone --bare <path to repo>\e[0m
+
+  EOS
+
+  slide <<-EOS, :block
+    # 
+    $:~/>\e[1m git clone --bare /home/my/codebase/ /remote/repos/codebase.git\e[0m
+  EOS
+
   slide <<-EOS, :block
     \e[1mSubmodules
     ----------\e[0m
@@ -402,7 +452,7 @@ section "... More Advanced Fun ..." do
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>\e[1m git submodule add git@github.com:clok/tiny-timer.git my-submodule\e[0m
+    $:~/my_repo/>\e[1m git submodule add git@github.com:clok/tt.git my-submodule\e[0m
     Cloning into 'my-submodule'...
     remote: Counting objects: 35, done.
     remote: Compressing objects: 100% (27/27), done.
@@ -433,6 +483,78 @@ section "... More Advanced Fun ..." do
 
     # Fetch the code for the submodules
     $:~/some/dir>\e[1m git submodule update\e[0m
+
+  EOS
+
+  slide <<-EOS, :block
+    \e[1mThe Stash Hash
+    --------------\e[0m
+    The \e[1mgit stash\e[0m command will move unstaged changes to stash hash
+    within the local repo.
+
+    This will reset the repo back to HEAD. 
+
+    A useful tool when merge conflicts arise or you just want to quickly discard
+    changes. 
+
+    The stash hash can be accessed at anytime within git and will always be
+     there unless you drop the stash.
+  EOS
+
+  slide <<-EOS, :block
+    # Move uncommitted changes to stash hash
+    $:~/my_repo/>\e[1m git stash\e[0m
+    Saved working directory and index state WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm - Auto-Commit - Wed Dec 19 16:45:03 2012
+    HEAD is now at 42b6efc Added sanitize functions for table mode in Parser.pm - Auto-Commit - Wed Dec 19 16:45:03 2012
+    
+    # List all available stash objects
+    $:~/my_repo/>\e[1m git stash list\e[0m
+    stash@{0}: WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
+    stash@{1}: WIP on v4: 4bfd79e Updated documentation for DeviceAtlas.pm
+    stash@{2}: WIP on master: 3fa9ee6 Added logging
+    stash@{3}: WIP on v2.0: f8f1f98 Testing out RedisDB.pm
+    
+  EOS
+
+  slide <<-EOS, :block
+    \e[1mDetatched Checkout
+    ------------------\e[0m
+    Checkout a named branch in a detatched state.
+
+    Will not have the ability to commit back to the repo unless given a name.
+
+    Useful for code inspection and experimentation.
+
+    \e[1mgit checkout <commit>\e[0m
+  EOS
+
+  slide <<-EOS, :block
+    $:~/my_repo/>\e[1m git checkout f14c2d8240e7861902d4d0d481b9a04f3e567b3c\e[0m
+    Note: checking out 'f14c2d8240e7861902d4d0d481b9a04f3e567b3c'.
+
+    You are in 'detached HEAD' state. You can look around, make experimental
+    changes and commit them, and you can discard any commits you make in this
+    state without impacting any branches by performing another checkout.
+
+    If you want to create a new branch to retain commits you create, you may
+    do so (now or later) by using -b with the checkout command again. Example:
+
+      git checkout -b new_branch_name
+
+    HEAD is now at f14c2d8... Added analytics_table.pl build scripts
+  EOS
+
+  slide <<-EOS, :block
+    \e[1mRebase a.k.a. Squash
+    --------------------\e[0m
+    \e[1mNote:\e[0m Do not squash commits that you've already shared with others.
+    You're changing history and it will cause trouble for others.
+
+    The most common use of this command is to take many commits and "squash"
+    them into one mega commit.
+
+    This can be useful in keeping a clean commit history, but it does remove the
+    meta-data associated with the commits within.
 
   EOS
 end

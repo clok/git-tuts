@@ -16,7 +16,9 @@ Example:
 
 Git Rebase
 ----------
-```git rebase``` will move the current working branch forward to the master HEAD. This is a powerful tool to work with managing versions and complex branching systems, but in my opinion is more dangerous a tool when working with multiple programmers. The most ccommon use of this command is to take many commits and "squash" them into one mega commit. This can be useful in keeping a clean commit history, but it does remove the meta-data associated with the commits withiun. The git-log will contain the commit comments along with the hash keys, but you will lose the ability to got to that specific commit or diff against it.
+```git rebase``` will move the current working branch forward to the master HEAD. This is a powerful tool to work with managing versions and complex branching systems, but in my opinion is more dangerous a tool when working with multipleThe most common use of this command is to take many commits and "squash" them into one mega commit. This can be useful in keeping a clean commit history, but it does remove the meta-data associated with the commits within.
+
+- **Note:** do not squash commits that you've already shared with others. You're changing history and it will cause trouble for others.
 
 [Detailed explination](http://git-scm.com/docs/git-rebase)
 [Practical exmaple of usage](https://ariejan.net/2011/07/05/git-squash-your-latests-commits-into-one)
@@ -38,7 +40,7 @@ Or you can do the steps by hand
 
 Detatched Checkout
 ------------------
-- ```git checout --detach <branch_name>``` will checkout a named branch (at the commit level) in a detatched state that is useful for inspection and experimentation. This will not have the ability to merge back into the repo unless the detatched HEAD is renamed as a new branch.
+- ```git checkout --detach <commit>``` will checkout a named branch (at the commit level) in a detatched state that is useful for inspection and experimentation. This will not have the ability to merge back into the repo unless the detatched HEAD is renamed as a new branch.
 
 Git Stash
 ---------
