@@ -5,9 +5,9 @@ slide <<-EOS, :center
 
 
   Derek Smith
-  @clok, @derek-smith
-
-  Oversee.net
+  
+  Github: @clok
+  Twitter: @cloksmith
 EOS
 
 slide <<-EOS, :center

@@ -3,9 +3,9 @@
 
 
   Derek Smith
-  @clok, @derek-smith
 
-  Oversee.net
+  Github: @clok
+  Twitter: @cloksmith
 
   It is easy to shoot your foot off with git,
   but also easy to revert to a previous foot
