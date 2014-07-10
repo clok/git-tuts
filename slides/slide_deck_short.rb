@@ -54,7 +54,7 @@ section "Basic Configuration Files" do
        name = Derek Smith
        email = derek@clokwork.net
     [core]
-       excludesFile = /home/dsmith/.gitignore_global
+       excludesFile = /home/derek/.gitignore_global
        editor = emacs -nw
     
   EOS
@@ -100,7 +100,7 @@ section "The Git Repo Basics" do
 
   slide <<-EOS, :block
     $:~/my_repo/>\e[1m git init\e[0m
-    Initialized empty Git repository in /home/dsmith/my_repo/.git/
+    Initialized empty Git repository in /home/derek/my_repo/.git/
     
     $:~/my_repo/> 
   EOS
@@ -225,8 +225,8 @@ section "Now to bring the fun ..." do
   EOS
 
   slide <<-EOS, :block
-    $:~/dev/>\e[1m git clone dsmith.dev:/home/dsmith/repos/git-demo.git\e[0m
-    Initialized empty Git repository in /home/dsmith/dev/git-demo/.git
+    $:~/dev/>\e[1m git clone clokwork.net:/home/derek/repos/git-demo.git\e[0m
+    Initialized empty Git repository in /home/derek/dev/git-demo/.git
     Checking out files: 100% (113/113), done.
 
   EOS

@@ -47,7 +47,7 @@ My typical .gitconfig
    name = Derek Smith
    email = derek@clokwork.net
 [core]
-   excludesFile = /home/dsmith/.gitignore_global
+   excludesFile = /home/derek/.gitignore_global
    editor = emacs -nw
     
 
@@ -95,7 +95,7 @@ This will initialize an empty repo in the current working directory.
 Any global configurations you have set will be applied.
 
 $:~/my_repo/> git init
-Initialized empty Git repository in /home/dsmith/my_repo/.git/
+Initialized empty Git repository in /home/derek/my_repo/.git/
     
 $:~/my_repo/> 
 
@@ -257,8 +257,8 @@ local until explicitly pushed to the remote origin.
 
 git clone <path to repo>
 
-$:~/dev/> git clone dsmith.dev:/home/dsmith/repos/git-demo.git
-Initialized empty Git repository in /home/dsmith/dev/git-demo/.git
+$:~/dev/> git clone clokwork.net:/home/derek/repos/git-demo.git
+Initialized empty Git repository in /home/derek/dev/git-demo/.git
 Checking out files: 100% (113/113), done.
 
 
