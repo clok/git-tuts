@@ -42,7 +42,7 @@ section "Basic Configuration Files" do
     $:~/>\e[1m cat .gitconfig\e[0m
     [user]
        name = Derek Smith
-       email = dsmith@oversee.net
+       email = derek@clokwork.net
     
     $:~/>
   EOS
@@ -52,7 +52,7 @@ section "Basic Configuration Files" do
     
     [user]
        name = Derek Smith
-       email = dsmith@oversee.net
+       email = derek@clokwork.net
     [core]
        excludesFile = /home/dsmith/.gitignore_global
        editor = emacs -nw
@@ -195,7 +195,7 @@ section "The Git Repo Basics" do
     
     $:~/my_repo/>\e[1m git log\e[0m
     commit 0bde0dddcc1107344e3bdbabc0cefb5a183c3a47
-    Author: Derek Smith <dsmith@oversee.net>
+    Author: Derek Smith <derek@clokwork.net>
     Date:   Wed Jan 9 12:18:28 2013 -0800
 
         NEATO commit message

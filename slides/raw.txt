@@ -37,7 +37,7 @@ Derek Smith
 $:~/> cat .gitconfig
 [user]
    name = Derek Smith
-   email = dsmith@oversee.net
+   email = derek@clokwork.net
     
 $:~/>
 
@@ -45,7 +45,7 @@ My typical .gitconfig
     
 [user]
    name = Derek Smith
-   email = dsmith@oversee.net
+   email = derek@clokwork.net
 [core]
    excludesFile = /home/dsmith/.gitignore_global
    editor = emacs -nw
@@ -168,7 +168,7 @@ create mode 100644 hello_git.txt
     
 $:~/my_repo/> git log
 commit 0bde0dddcc1107344e3bdbabc0cefb5a183c3a47
-Author: Derek Smith <dsmith@oversee.net>
+Author: Derek Smith <derek@clokwork.net>
 Date:   Wed Jan 9 12:18:28 2013 -0800
 
 NEATO commit message
