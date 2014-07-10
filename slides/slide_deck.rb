@@ -257,8 +257,8 @@ section "The Git Repo Basics" do
 
     # List all remote branches
     $:~/dev/malarkey>\e[1m git branch -r\e[0m
-      github.corp/master
-      github.corp/v4
+      stash.internal/master
+      stash.internal/v4
       origin/master
       origin/v4
 
@@ -317,17 +317,17 @@ section "Now to bring the fun ..." do
 
   slide <<-EOS, :block
     # Add a new remote repo
-    $:~/github.corp/git-demo/>\e[1m git remote add github git@github.com:clok/git-tuts.git\e[0m
+    $:~/stash.internal/git-demo/>\e[1m git remote add github git@github.com:clok/git-tuts.git\e[0m
 
     # List all remote linked repos
-    $:~/github.corp/git-demo/>\e[1m git remote -v\e[0m
+    $:~/stash.internal/git-demo/>\e[1m git remote -v\e[0m
     github	git@github.com:clok/git-tuts.git (fetch)
     github	git@github.com:clok/git-tuts.git (push)
     origin	derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
     origin	derek@clokwork.net:/mnt/repos/git-demo.git (push)
 
     # Remove a remote repo link
-    $:~/github.corp/git-demo/>\e[1m git remote rm github\e[0m
+    $:~/stash.internal/git-demo/>\e[1m git remote rm github\e[0m
   EOS
 
   slide <<-EOS, :block

@@ -222,8 +222,8 @@ $:~/my_repo/> git branch
 
 # List all remote branches
 $:~/dev/malarkey> git branch -r
-  github.corp/master
-  github.corp/v4
+  stash.internal/master
+  stash.internal/v4
   origin/master
   origin/v4
 
@@ -272,17 +272,17 @@ Essential for synchronizing multiple machines and repos.
 
 
 # Add a new remote repo
-$:~/github.corp/git-demo/> git remote add github git@github.com:clok/git-tuts.git
+$:~/stash.internal/git-demo/> git remote add github git@github.com:clok/git-tuts.git
 
 # List all remote linked repos
-$:~/github.corp/git-demo/> git remote -v
+$:~/stash.internal/git-demo/> git remote -v
 github	git@github.com:clok/git-tuts.git (fetch)
 github	git@github.com:clok/git-tuts.git (push)
 origin	derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
 origin	derek@clokwork.net:/mnt/repos/git-demo.git (push)
 
 # Remove a remote repo link
-$:~/github.corp/git-demo/> git remote rm github
+$:~/stash.internal/git-demo/> git remote rm github
 
 Git Fetch
 ---------
