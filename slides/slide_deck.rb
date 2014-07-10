@@ -323,8 +323,8 @@ section "Now to bring the fun ..." do
     $:~/github.corp/git-demo/>\e[1m git remote -v\e[0m
     github	git@github.com:clok/git-tuts.git (fetch)
     github	git@github.com:clok/git-tuts.git (push)
-    origin	dsmith@dsmith.dev.corp.oversee.net:~/repos/git-demo.git (fetch)
-    origin	dsmith@dsmith.dev.corp.oversee.net:~/repos/git-demo.git (push)
+    origin	derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
+    origin	derek@clokwork.net:/mnt/repos/git-demo.git (push)
 
     # Remove a remote repo link
     $:~/github.corp/git-demo/>\e[1m git remote rm github\e[0m
