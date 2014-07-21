@@ -1,14 +1,33 @@
 # encoding: utf-8
 
+COLOR_END = "\e[0m"
+WHITE = "\e[1m"
+RED = "\033[0;31m"
+GREEN = "\033[0;32m"
+RED_BOLD = "\033[01;31m"
+
 slide <<-EOS, :center
-  \e[1mGit 101: An Introduction to Git\e[0m
+  #{WHITE}Git 101: An Introduction to Git#{COLOR_END}
 
 
-  Derek Smith
+  #{RED_BOLD}Derek Smith#{COLOR_END}
   
   Github: @clok
   Twitter: @cloksmith
 EOS
+
+# Agenda
+section "The Agenda" do
+  slide <<-EOS, :block
+    #{WHITE}The Agenda
+    ----------#{COLOR_END}
+    1. Git Configuration
+    2. Git Repo Basics
+    3. Advanced Git
+    4. Q & A
+
+  EOS
+end
 
 slide <<-EOS, :center
   It is easy to shoot your foot off with git,
@@ -18,10 +37,11 @@ slide <<-EOS, :center
   - Jack William Bell
 EOS
 
+# Basic Configuration
 section "Basic Configuration Files" do
   slide <<-EOS, :block
-    \e[1mConfig File (.gitconfig)
-    ------------------------\e[0m
+    #{WHITE}Config File (.gitconfig)
+    ------------------------#{COLOR_END}
     This is the basic config file that is globally set from the users home
     directory. (ex. /home/user/.gitconfig)
 
@@ -34,12 +54,12 @@ section "Basic Configuration Files" do
   EOS
 
   slide <<-EOS, :block
-    $:~/>\e[1m git config --global user.name "Derek Smith"\e[0m
+    $:~/>#{WHITE} git config --global user.name "Derek Smith"#{COLOR_END}
     
-    $:~/>\e[1m git config --global user.name\e[0m
+    $:~/>#{WHITE} git config --global user.name#{COLOR_END}
     Derek Smith
     
-    $:~/>\e[1m cat .gitconfig\e[0m
+    $:~/>#{WHITE} cat .gitconfig#{COLOR_END}
     [user]
        name = Derek Smith
        email = derek@clokwork.net
@@ -60,17 +80,20 @@ section "Basic Configuration Files" do
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Ignore (.gitignore)
-    -----------------------\e[0m
+    #{WHITE}Git Ignore (.gitignore)
+    -----------------------#{COLOR_END}
     Include file extensions, names and negations. 
 
     You can set a global ignore if you like or you can add custom ignore files
     per repo.
 
+    Cool site to generate common .gitignore files:
+    #{WHITE}http://www.gitignore.io/#{COLOR_END}
+
   EOS
 
   slide <<-EOS, :block
-    $:~/dev/malarkey/>\e[1m cat .gitognore\e[0m
+    $:~/dev/malarkey/>#{WHITE} cat .gitognore#{COLOR_END}
     # Ignore compiled shared objects
     *.so
     
@@ -91,16 +114,11 @@ section "Basic Configuration Files" do
   EOS
 end
 
+# Git Repo Basics
 section "The Git Repo Basics" do
-  slide <<-EOS, :center
-    Git manages a repo from the root directory down.
-
-    Unlike SVN, the entire repo is stored within one .git directory.
-  EOS
-
   slide <<-EOS, :block
-    \e[1mGit Init
-    --------\e[0m
+    #{WHITE}Git Init
+    --------#{COLOR_END}
     To initialize a new simply use 'git init'
 
     This will initialize an empty repo in the current working directory.
@@ -109,15 +127,15 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>\e[1m git init\e[0m
+    $:~/my_repo/>#{WHITE} git init#{COLOR_END}
     Initialized empty Git repository in /home/derek/my_repo/.git/
     
     $:~/my_repo/> 
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Status
-    ----------\e[0m
+    #{WHITE}Git Status
+    ----------#{COLOR_END}
     Produces report of all modified, deleted and untracked files within a repo.
 
     Use this to determine what needs to be staged for commit.
@@ -128,7 +146,7 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>\e[1m git status\e[0m
+    $:~/my_repo/>#{WHITE} git status#{COLOR_END}
     # On branch master
     #
     # Initial commit
@@ -143,8 +161,32 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Add
-    -------\e[0m
+$:~/github/git (git::edit-readme)>#{WHITE} git diff README\e[0em
+diff --git a/README b/README
+index 15a8e23..e5c9666 100644
+--- a/README
++++ b/README
+@@ -6,6 +6,7 @@
+
+ "git" can mean anything, depending on your mood.
+
++ - The answer to all things.
+  - random three-letter combination that is pronounceable, and not
+    actually used by any common UNIX command.  The fact that it is a
+    mispronunciation of "get" may or may not be relevant.
+@@ -13,7 +14,6 @@
+    dictionary of slang.
+  - "global information tracker": you're in a good mood, and it actually
+    works for you. Angels sing, and a light suddenly fills the room.
+- - "goddamn idiotic truckload of sh*t": when it breaks
+
+ Git is a fast, scalable, distributed revision control system with an
+ unusually rich command set that provides both high-level operations
+  EOS
+
+  slide <<-EOS, :block
+    #{WHITE}Git Add
+    -------#{COLOR_END}
     Stage all modifications to previously committed files and to any new files
     that you want to add to the repo. 
 
@@ -153,11 +195,11 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>\e[1m ls\e[0m
+    $:~/my_repo/>#{WHITE} ls#{COLOR_END}
     hello_git.txt	new-file.pl	new-file.rb
     
-    $:~/my_repo/>\e[1m git add new-file.*\e[0m
-    $:~/my_repo/>\e[1m git status\e[0m
+    $:~/my_repo/>#{WHITE} git add new-file.*#{COLOR_END}
+    $:~/my_repo/>#{WHITE} git status#{COLOR_END}
     # On branch master
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
@@ -170,8 +212,8 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Commit
-    ----------\e[0m
+    #{WHITE}Git Commit
+    ----------#{COLOR_END}
     Commit locally staged changes to the the local repo.
     
     Unlike 'svn commit' which will push to the shared repo.
@@ -188,12 +230,12 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>\e[1m git commit -m "NEATO commit message"\e[0m
+    $:~/my_repo/>#{WHITE} git commit -m "NEATO commit message"#{COLOR_END}
     [master (root-commit) 0bde0dd] Initial commit
     1 file changed, 1 insertion(+)
     create mode 100644 hello_git.txt
     
-    $:~/my_repo/>\e[1m git log\e[0m
+    $:~/my_repo/>#{WHITE} git log#{COLOR_END}
     commit 0bde0dddcc1107344e3bdbabc0cefb5a183c3a47
     Author: Derek Smith <derek@clokwork.net>
     Date:   Wed Jan 9 12:18:28 2013 -0800
@@ -204,8 +246,8 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Rm
-    ------\e[0m
+    #{WHITE}Git Rm
+    ------#{COLOR_END}
     Remove a tracked file from version control and the file system.
 
     If a file is not tracked within the repo, 'git rm' will ignore the file.
@@ -213,13 +255,13 @@ section "The Git Repo Basics" do
    EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>\e[1m ls\e[0m
+    $:~/my_repo/>#{WHITE} ls#{COLOR_END}
     hello_git.txt  file_to_delete
     
-    $:~/my_repo/>\e[1m git rm file_to_delete \e[0m
+    $:~/my_repo/>#{WHITE} git rm file_to_delete #{COLOR_END}
     rm 'file_to_delete'
     
-    $:~/my_repo/>\e[1m git status\e[0m
+    $:~/my_repo/>#{WHITE} git status#{COLOR_END}
     # On branch master
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
@@ -227,20 +269,78 @@ section "The Git Repo Basics" do
     #	deleted:    file_to_delete
     #
     
-    $:~/my_repo/>\e[1m git commit -m "Removed file_to_delete from repo"\e[0m
+    $:~/my_repo/>#{WHITE} git commit -m "Removed file_to_delete from repo"#{COLOR_END}
     [master 40f4fd4] Removed file_to_delete from repo
      1 file changed, 1 deletion(-)
      delete mode 100644 file_to_delete
     
-    $:~/my_repo/>\e[1m ls\e[0m
+    $:~/my_repo/>#{WHITE} ls#{COLOR_END}
     hello_git.txt
     
     $:~/my_repo/> 
   EOS
+end
+
+section "Basic Recap" do
+  slide <<-EOS, :block
+#{WHITE}Basic Workflow
+--------------#{COLOR_END}
+1. #{WHITE}git status#{COLOR_END} to view all files changed, untracked or deleted.
+2. #{WHITE}git diff <file>#{COLOR_END} to view the delta to be committed.
+3. #{WHITE}git add <file>#{COLOR_END} to add file to staging area.
+4. #{WHITE}git commit -m "<commit msg>"#{COLOR_END}
+  EOS
+end
+
+section "Cloning a Repository" do
+  slide <<-EOS, :center
+    THIS IS A PLACE HOLDER
+  EOS
 
   slide <<-EOS, :block
-    \e[1mGit Branch
-    ----------\e[0m
+
+# Clone a repository from a remote
+$:~/github>#{WHITE} git clone git@github.com:git/git.git#{COLOR_END}
+Cloning into 'git'...
+remote: Counting objects: 174834, done.
+remote: Compressing objects: 100% (47397/47397), done.
+remote: Total 174834 (delta 126246), reused 173754 (delta 125426)
+Receiving objects: 100% (174834/174834), 61.75 MiB | 6.89 MiB/s, done.
+Resolving deltas: 100% (126246/126246), done.
+Checking connectivity... done.
+
+$:~/github>#{WHITE} ls#{COLOR_END}
+git   scrimps
+  EOS
+
+  slide <<-EOS, :block
+$:~/github>#{WHITE} cd git#{COLOR_END}
+$:~/github/git (git::master)>#{WHITE} git status#{COLOR_END}
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+nothing to commit, working directory clean
+
+$:~/github/git (git::master)>#{WHITE} git remote -v#{COLOR_END}
+origin  git@github.com:git/git.git (fetch)
+origin  git@github.com:git/git.git (push)
+
+$:~/github/git (git::master)>#{WHITE} git branch -a#{COLOR_END}
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/maint
+  remotes/origin/master
+  remotes/origin/next
+  remotes/origin/pu
+  remotes/origin/todo
+
+  EOS
+end
+
+section "Branching & Tracking" do
+  slide <<-EOS, :block
+    #{WHITE}Git Branch
+    ----------#{COLOR_END}
     Branching is fast and simple within git.
 
     Entire branch structure is contained within the repo.
@@ -248,45 +348,65 @@ section "The Git Repo Basics" do
 
   slide <<-EOS, :block
     # Create a new branch named 'features'
-    $:~/my_repo/>\e[1m git branch features\e[0m
+    $:~/my_repo/ (git::master)>#{WHITE} git branch features#{COLOR_END}
     
     # List all local branches
-    $:~/my_repo/>\e[1m git branch\e[0m
+    $:~/my_repo/ (git::master)>#{WHITE} git branch#{COLOR_END}
       feature
     * master
 
     # List all remote branches
-    $:~/dev/malarkey>\e[1m git branch -r\e[0m
-      stash.internal/master
-      stash.internal/v4
+    $:~/dev/malarkey (git::master)>#{WHITE} git branch -r#{COLOR_END}
+      stash/master
+      stash/v4
       origin/master
       origin/v4
 
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Checkout
-    ------------\e[0m
+
+$:~/my_repo/ (git::master)>#{WHITE} git remote -v#{COLOR_END}
+origin  git@github.com:clok/scrimps.git (fetch)
+origin  git@github.com:clok/scrimps.git (push)
+stash ssh://git@stash.phmgmt.com:7999/~derek/scrimps.git (fetch)
+stash ssh://git@stash.phmgmt.com:7999/~derek/scrimps.git (push)
+
+$:~/my_repo/ (git::master)>#{WHITE} git branch -vv#{COLOR_END}
+  demo          2ca62eb [stash/demo: behind 1] added sql hackery
+* master        175fa5f [origin/master] simplified autoGit and added a new script
+  bugfix        29017c1 fixed branch bug
+  ta            175fa5f [stash/test-alias] simplified autoGit and added a new script
+  test-alias    175fa5f [stash/test-alias] simplified autoGit and added a new script
+  woot          dc11003 [stash/woot] added new script for converting bare repo to stash
+
+  EOS
+end
+
+section "Git Checkout" do
+  slide <<-EOS, :block
+    #{WHITE}Git Checkout
+    ------------#{COLOR_END}
     Switch to another working branch. 
   EOS
 
   slide <<-EOS, :block
     # Checkout a previously created branch.
-    $:~/my_repo/>\e[1m git checkout <branch name>\e[0m
+    $:~/my_repo/>#{WHITE} git checkout <branch name>#{COLOR_END}
 
     # Create and checkout a newly named branch.
-    $:~/my_repo/>\e[1m git checkout -B <branch name>\e[0m
+    $:~/my_repo/>#{WHITE} git checkout -B <branch name>#{COLOR_END}
     
     # Discard any uncommitted modifications and move the file back to the HEAD.
-    $:~/my_repo/>\e[1m git checkout -- <file name>\e[0m 
+    $:~/my_repo/>#{WHITE} git checkout -- <file name>#{COLOR_END} 
 
   EOS
 end
 
 section "Now to bring the fun ..." do
   slide <<-EOS, :block
-    \e[1mGit Clone
-    ---------\e[0m
+    #{WHITE}Git Clone
+    ---------#{COLOR_END}
     The essential git command. 
 
     Similar to 'svn checkout' in that it will locally clone a remote repo.
@@ -294,19 +414,19 @@ section "Now to bring the fun ..." do
     This major difference is that once a repo is cloned, all commits remain
     local until explicitly pushed to the remote origin.
 
-    \e[1mgit clone <path to repo>\e[0m
+    #{WHITE}git clone <path to repo>#{COLOR_END}
   EOS
 
   slide <<-EOS, :block
-    $:~/dev/>\e[1m git clone clokwork.net:/home/derek/repos/git-demo.git\e[0m
+    $:~/dev/>#{WHITE} git clone clokwork.net:/home/derek/repos/git-demo.git#{COLOR_END}
     Initialized empty Git repository in /home/derek/dev/git-demo/.git
     Checking out files: 100% (113/113), done.
 
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Remote
-    ----------\e[0m
+    #{WHITE}Git Remote
+    ----------#{COLOR_END}
     The next essential git command.
 
     Remote allows you to add and remove remote repo paths.
@@ -317,37 +437,37 @@ section "Now to bring the fun ..." do
 
   slide <<-EOS, :block
     # Add a new remote repo
-    $:~/stash.internal/git-demo/>\e[1m git remote add github git@github.com:clok/git-tuts.git\e[0m
+    $:~/stash/git-demo/>#{WHITE} git remote add github git@github.com:clok/git-tuts.git#{COLOR_END}
 
     # List all remote linked repos
-    $:~/stash.internal/git-demo/>\e[1m git remote -v\e[0m
+    $:~/stash/git-demo/>#{WHITE} git remote -v#{COLOR_END}
     github	git@github.com:clok/git-tuts.git (fetch)
     github	git@github.com:clok/git-tuts.git (push)
     origin	derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
     origin	derek@clokwork.net:/mnt/repos/git-demo.git (push)
 
     # Remove a remote repo link
-    $:~/stash.internal/git-demo/>\e[1m git remote rm github\e[0m
+    $:~/stash/git-demo/>#{WHITE} git remote rm github#{COLOR_END}
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Fetch
-    ---------\e[0m
+    #{WHITE}Git Fetch
+    ---------#{COLOR_END}
     Check and retrieve an update from a remote repo and branch.
 
     The update will be stored in a branch called '<remote>/<branch>'
     
     # Fetch all remote/branches
-    \e[1mgit fetch\e[0m
+    #{WHITE}git fetch#{COLOR_END}
 
     # Fetch only a specific remote/branch
-    \e[1mgit fetch <remote name> <branch name>\e[0m
+    #{WHITE}git fetch <remote name> <branch name>#{COLOR_END}
 
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Merge
-    ---------\e[0m
+    #{WHITE}Git Merge
+    ---------#{COLOR_END}
     Straight forward, merge branch into current working branch.
 
     Git merges are VERY fast.
@@ -362,12 +482,12 @@ section "Now to bring the fun ..." do
 
   slide <<-EOS, :block
     # Perform the fetch 
-    $:~/github/redis/>\e[1m git fetch origin unstable\e[0m
+    $:~/github/redis/>#{WHITE} git fetch origin unstable#{COLOR_END}
     From git://github.com/antirez/redis
      * branch            unstable   -> FETCH_HEAD
 
     # Then merge the fetched code
-    $:~/github/redis/>\e[1m git merge origin/unstable\e[0m
+    $:~/github/redis/>#{WHITE} git merge origin/unstable#{COLOR_END}
     Updating be6cbd3..d7740fc
     Fast-forward
      CONTRIBUTING                                                   |    7 ++
@@ -378,8 +498,8 @@ section "Now to bring the fun ..." do
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Pull
-    --------\e[0m
+    #{WHITE}Git Pull
+    --------#{COLOR_END}
     Basically a 'fetch + merge'
 
     Similar in function to 'svn update'
@@ -387,7 +507,7 @@ section "Now to bring the fun ..." do
 
   slide <<-EOS, :block
     # Perform the pull 
-    $:~/github/redis/>\e[1m git pull origin unstable\e[0m
+    $:~/github/redis/>#{WHITE} git pull origin unstable#{COLOR_END}
     remote: Counting objects: 9, done.
     remote: Compressing objects: 100% (5/5), done.
     remote: Total 7 (delta 4), reused 5 (delta 2)
@@ -401,8 +521,8 @@ section "Now to bring the fun ..." do
   EOS
 
   slide <<-EOS, :block
-    \e[1mGit Push
-    --------\e[0m
+    #{WHITE}Git Push
+    --------#{COLOR_END}
     Attempt to push all commits in local repo to remote repo.
 
     Similar in function to 'svn commit'
@@ -410,7 +530,7 @@ section "Now to bring the fun ..." do
 
   slide <<-EOS, :block
     # Perform the push
-    $:~/github/git-demo/>\e[1m git push github master\e[0m
+    $:~/github/git-demo/>#{WHITE} git push github master#{COLOR_END}
     Counting objects: 8, done.
     Delta compression using up to 8 threads.
     Compressing objects: 100% (5/5), done.
@@ -423,24 +543,24 @@ end
 
 section "... More Advanced Fun ..." do
   slide <<-EOS, :block
-    \e[1mBare Clone Repository
-    ---------------------\e[0m
+    #{WHITE}Bare Clone Repository
+    ---------------------#{COLOR_END}
     Makes a publishable form of a repo.
 
     Preferable method for sharing a codebase among multiple developers.
 
-    \e[1mgit clone --bare <path to repo>\e[0m
+    #{WHITE}git clone --bare <path to repo>#{COLOR_END}
 
   EOS
 
   slide <<-EOS, :block
     # Create a bare repository
-    $:~/>\e[1m git clone --bare /home/my/codebase/ /remote/repos/codebase.git\e[0m
+    $:~/>#{WHITE} git clone --bare /home/my/codebase/ /remote/repos/codebase.git#{COLOR_END}
   EOS
 
   slide <<-EOS, :block
-    \e[1mSubmodules
-    ----------\e[0m
+    #{WHITE}Submodules
+    ----------#{COLOR_END}
     An external repo you want to use within another repo.
 
     NOTE:
@@ -452,7 +572,7 @@ section "... More Advanced Fun ..." do
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>\e[1m git submodule add git@github.com:clok/tt.git my-submodule\e[0m
+    $:~/my_repo/>#{WHITE} git submodule add git@github.com:clok/tt.git my-submodule#{COLOR_END}
     Cloning into 'my-submodule'...
     remote: Counting objects: 35, done.
     remote: Compressing objects: 100% (27/27), done.
@@ -460,7 +580,7 @@ section "... More Advanced Fun ..." do
     Receiving objects: 100% (35/35), 5.30 KiB, done.
     Resolving deltas: 100% (10/10), done.
     
-    $:~/my_repo/>\e[1m cat .gitmodules\e[0m
+    $:~/my_repo/>#{WHITE} cat .gitmodules#{COLOR_END}
     [submodule "my-submodule"]
         path = my-submodule
         url = git@github.com:clok/tiny-timer.git
@@ -469,27 +589,27 @@ section "... More Advanced Fun ..." do
   EOS
 
   slide <<-EOS, :block
-    \e[1mCloning with Submodules
-    -----------------------\e[0m
-    $:~/some/dir>\e[1m git clone --recursive <path to repo/>\e[0m
+    #{WHITE}Cloning with Submodules
+    -----------------------#{COLOR_END}
+    $:~/some/dir>#{WHITE} git clone --recursive <path to repo/>#{COLOR_END}
 
     Or
 
     # Clone the repo
-    $:~/some/dir>\e[1m git clone <path to repo/>\e[0m
+    $:~/some/dir>#{WHITE} git clone <path to repo/>#{COLOR_END}
 
     # Initialize all submodules in the .gitmodules file
-    $:~/some/dir>\e[1m git submodule init\e[0m
+    $:~/some/dir>#{WHITE} git submodule init#{COLOR_END}
 
     # Fetch the code for the submodules
-    $:~/some/dir>\e[1m git submodule update\e[0m
+    $:~/some/dir>#{WHITE} git submodule update#{COLOR_END}
 
   EOS
 
   slide <<-EOS, :block
-    \e[1mThe Stash Hash
-    --------------\e[0m
-    The \e[1mgit stash\e[0m command will move unstaged changes to stash hash
+    #{WHITE}The Stash Hash
+    --------------#{COLOR_END}
+    The #{WHITE}git stash#{COLOR_END} command will move unstaged changes to stash hash
     within the local repo.
 
     This will reset the repo back to HEAD. 
@@ -503,12 +623,12 @@ section "... More Advanced Fun ..." do
 
   slide <<-EOS, :block
     # Move uncommitted changes to stash hash
-    $:~/my_repo/>\e[1m git stash\e[0m
+    $:~/my_repo/>#{WHITE} git stash#{COLOR_END}
     Saved working directory and index state WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
     HEAD is now at 42b6efc Added sanitize functions for table mode in Parser.pm
     
     # List all available stash objects
-    $:~/my_repo/>\e[1m git stash list\e[0m
+    $:~/my_repo/>#{WHITE} git stash list#{COLOR_END}
     stash@{0}: WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
     stash@{1}: WIP on v4: 4bfd79e Updated documentation for DeviceAtlas.pm
     stash@{2}: WIP on master: 3fa9ee6 Added logging
@@ -517,19 +637,19 @@ section "... More Advanced Fun ..." do
   EOS
 
   slide <<-EOS, :block
-    \e[1mDetached Checkout
-    -----------------\e[0m
+    #{WHITE}Detached Checkout
+    -----------------#{COLOR_END}
     Checkout a named branch in a detached state.
 
     Will not have the ability to commit back to the repo unless given a name.
 
     Useful for code inspection and experimentation.
 
-    \e[1mgit checkout <commit>\e[0m
+    #{WHITE}git checkout <commit>#{COLOR_END}
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>\e[1m git checkout f14c2d8240e7861902d4d0d481b9a04f3e567b3c\e[0m
+    $:~/my_repo/>#{WHITE} git checkout f14c2d8240e7861902d4d0d481b9a04f3e567b3c#{COLOR_END}
     Note: checking out 'f14c2d8240e7861902d4d0d481b9a04f3e567b3c'.
 
     You are in 'detached HEAD' state. You can look around, make experimental
@@ -545,9 +665,9 @@ section "... More Advanced Fun ..." do
   EOS
 
   slide <<-EOS, :block
-    \e[1mRebase a.k.a. Squash
-    --------------------\e[0m
-    \e[1mNote:\e[0m Do not squash commits that you've already shared with others.
+    #{WHITE}Rebase a.k.a. Squash
+    --------------------#{COLOR_END}
+    #{WHITE}Note:#{COLOR_END} Do not squash commits that you've already shared with others.
     You're changing history and it will cause trouble for others.
 
     The most common use of this command is to take many commits and "squash"
