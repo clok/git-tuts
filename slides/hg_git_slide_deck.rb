@@ -4,6 +4,7 @@ COLOR_END = "\e[0m"
 WHITE = "\e[1m"
 RED = "\033[0;31m"
 GREEN = "\033[0;32m"
+BLUE = "\033[01;34m"
 RED_BOLD = "\033[01;31m"
 
 slide <<-EOS, :center
@@ -12,12 +13,12 @@ slide <<-EOS, :center
 
   #{RED_BOLD}Derek Smith#{COLOR_END}
   
-  Github: @clok
-  Twitter: @cloksmith
+  Github: #{BLUE}@clok#{COLOR_END}
+  Twitter: #{BLUE}@cloksmith#{COLOR_END}
 EOS
 
 # Agenda
-section "The Agenda" do
+section "- The Agenda -" do
   slide <<-EOS, :block
     #{WHITE}The Agenda
     ----------#{COLOR_END}
@@ -147,38 +148,50 @@ section "The Git Repo Basics" do
 
   slide <<-EOS, :block
     $:~/my_repo/>#{WHITE} git status#{COLOR_END}
-    # On branch master
-    #
-    # Initial commit
-    #
-    # Untracked files:
-    #   (use "git add <file>..." to include in what will be committed)
-    #
-    #	hello_git.txt
+    On branch master
+
+      Initial commit
+
+    Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+
+      #{RED}hello_git.txt#{COLOR_END}
+
     nothing added to commit but untracked files present (use "git add" to track)
 
     $:~/my_repo/> 
   EOS
 
   slide <<-EOS, :block
-$:~/github/git (git::edit-readme)>#{WHITE} git diff README\e[0em
-diff --git a/README b/README
+    #{WHITE}Git Diff
+    ----------#{COLOR_END}
+    Produces diff of all modified tracked files within a repo.
+
+    Use this to determine what changes will be staged for commit.
+
+    You can designate a specific diff tool in the .gitconfig
+  EOS
+
+  slide <<-EOS, :block
+$:~/github/git (git::edit-readme)>#{WHITE} git diff README#{COLOR_END}
+#{WHITE}diff --git a/README b/README
 index 15a8e23..e5c9666 100644
 --- a/README
-+++ b/README
-@@ -6,6 +6,7 @@
++++ b/README#{COLOR_END}
+#{BLUE}@@ -6,6 +6,7 @@#{COLOR_END}
 
  "git" can mean anything, depending on your mood.
 
-+ - The answer to all things.
+#{GREEN}+ - The answer to all things.#{COLOR_END}
   - random three-letter combination that is pronounceable, and not
     actually used by any common UNIX command.  The fact that it is a
     mispronunciation of "get" may or may not be relevant.
-@@ -13,7 +14,6 @@
+}
+#{BLUE}@@ -13,7 +14,6 @@#{COLOR_END}
     dictionary of slang.
   - "global information tracker": you're in a good mood, and it actually
     works for you. Angels sing, and a light suddenly fills the room.
-- - "goddamn idiotic truckload of sh*t": when it breaks
+#{RED}- - "goddamn idiotic truckload of sh*t": when it breaks#{COLOR_END}
 
  Git is a fast, scalable, distributed revision control system with an
  unusually rich command set that provides both high-level operations
@@ -200,33 +213,27 @@ index 15a8e23..e5c9666 100644
     
     $:~/my_repo/>#{WHITE} git add new-file.*#{COLOR_END}
     $:~/my_repo/>#{WHITE} git status#{COLOR_END}
-    # On branch master
-    # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
-    #
-    #	new file:   new-file.pl
-    #	new file:   new-file.rb
-    #
+    On branch master
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+    
+      #{GREEN}new file:   new-file.pl
+      new file:   new-file.rb#{COLOR_END}
 
     $:~/my_repo/> 
   EOS
 
   slide <<-EOS, :block
-    #{WHITE}Git Commit
-    ----------#{COLOR_END}
-    Commit locally staged changes to the the local repo.
-    
-    Unlike 'svn commit' which will push to the shared repo.
+#{WHITE}Git Commit
+----------#{COLOR_END}
+Commit locally staged changes to the the local repo.
 
-    'git commit' will open the editor set in either the .gitconfig or by the
-    'EDITOR' environment variable.
+#{WHITE}git commit#{COLOR_END} will open the editor set in either the
+.gitconfig or by the 'EDITOR' environment variable.
 
-    After save & quiting the editor the commit will complete.
+After save & quiting the editor the commit will completed.
 
-    Quiting the editor, w/o saving, will cancel the commit.
-
-    '-m "<commit message>"'
-    '-a' will automatically stage all tracked changes and commit them.
+Quiting the editor, w/o saving, will cancel the commit.
   EOS
 
   slide <<-EOS, :block
@@ -279,9 +286,20 @@ index 15a8e23..e5c9666 100644
     
     $:~/my_repo/> 
   EOS
+
+  slide <<-EOS, :block
+#{WHITE}Git Help
+--------#{COLOR_END}
+Each git command is like a Swiss Army knife.
+
+#{GREEN}git checkout#{COLOR_END} = #{BLUE}hg branch#{COLOR_END} + #{BLUE}hg update#{COLOR_END} + #{BLUE}hg revert#{COLOR_END}
+
+So, using #{WHITE}git help <cmd>#{COLOR_END} is always advised when you have
+questions... Oh, and your peers... and Google... 
+  EOS
 end
 
-section "Basic Recap" do
+section "Let's Recap" do
   slide <<-EOS, :block
 #{WHITE}Basic Workflow
 --------------#{COLOR_END}
@@ -298,8 +316,8 @@ section "Cloning a Repository" do
   EOS
 
   slide <<-EOS, :block
-
-# Clone a repository from a remote
+#{WHITE}Clone a repository from a remote
+--------------------------------#{COLOR_END}
 $:~/github>#{WHITE} git clone git@github.com:git/git.git#{COLOR_END}
 Cloning into 'git'...
 remote: Counting objects: 174834, done.
@@ -326,24 +344,28 @@ origin  git@github.com:git/git.git (fetch)
 origin  git@github.com:git/git.git (push)
 
 $:~/github/git (git::master)>#{WHITE} git branch -a#{COLOR_END}
-* master
-  remotes/origin/HEAD -> origin/master
+#{GREEN}* master#{COLOR_END}
+  #{RED}remotes/origin/HEAD -> origin/master
   remotes/origin/maint
   remotes/origin/master
   remotes/origin/next
   remotes/origin/pu
-  remotes/origin/todo
+  remotes/origin/todo#{COLOR_END}
 
   EOS
 end
 
 section "Branching & Tracking" do
   slide <<-EOS, :block
-    #{WHITE}Git Branch
-    ----------#{COLOR_END}
-    Branching is fast and simple within git.
+#{WHITE}Git Branch
+----------#{COLOR_END}
+Branching is fast and simple within git.
 
-    Entire branch structure is contained within the repo.
+When a remote branched is checked out on a local copy it forms a tracked pair
+with the local and remote branch. What this means is that you will be notfied
+of branch changes on the remote after the changes have been fetched. Also,
+this means that when you push your changes to that branch, it will default to
+the tracked branch.
   EOS
 
   slide <<-EOS, :block
@@ -353,14 +375,14 @@ section "Branching & Tracking" do
     # List all local branches
     $:~/my_repo/ (git::master)>#{WHITE} git branch#{COLOR_END}
       feature
-    * master
+    #{GREEN}* master#{COLOR_END}
 
     # List all remote branches
     $:~/dev/malarkey (git::master)>#{WHITE} git branch -r#{COLOR_END}
-      stash/master
+      #{RED}stash/master
       stash/v4
       origin/master
-      origin/v4
+      origin/v4#{COLOR_END}
 
   EOS
 
@@ -373,57 +395,47 @@ stash ssh://git@stash.phmgmt.com:7999/~derek/scrimps.git (fetch)
 stash ssh://git@stash.phmgmt.com:7999/~derek/scrimps.git (push)
 
 $:~/my_repo/ (git::master)>#{WHITE} git branch -vv#{COLOR_END}
-  demo          2ca62eb [stash/demo: behind 1] added sql hackery
-* master        175fa5f [origin/master] simplified autoGit and added a new script
+  demo          2ca62eb [#{BLUE}stash/demo#{COLOR_END}: behind 1] added sql hackery
+#{GREEN}* master#{COLOR_END}        175fa5f [#{BLUE}origin/master#{COLOR_END}] simplified autoGit and added a new script
   bugfix        29017c1 fixed branch bug
-  ta            175fa5f [stash/test-alias] simplified autoGit and added a new script
-  test-alias    175fa5f [stash/test-alias] simplified autoGit and added a new script
-  woot          dc11003 [stash/woot] added new script for converting bare repo to stash
+  ta            175fa5f [#{BLUE}stash/test-alias#{COLOR_END}] simplified autoGit and added a new script
+  test-alias    175fa5f [#{BLUE}stash/test-alias#{COLOR_END}] simplified autoGit and added a new script
+  woot          dc11003 [#{BLUE}stash/woot#{COLOR_END}] added new script for converting bare repo to stash
 
   EOS
 end
 
 section "Git Checkout" do
   slide <<-EOS, :block
-    #{WHITE}Git Checkout
-    ------------#{COLOR_END}
-    Switch to another working branch. 
+#{WHITE}Git Checkout
+------------#{COLOR_END}
+
+#{GREEN}git checkout#{COLOR_END} = #{BLUE}hg branch#{COLOR_END} + #{BLUE}hg update#{COLOR_END} + #{BLUE}hg revert#{COLOR_END}
+
   EOS
 
   slide <<-EOS, :block
-    # Checkout a previously created branch.
-    $:~/my_repo/>#{WHITE} git checkout <branch name>#{COLOR_END}
+# Checkout a previously created branch.
+$:~/my_repo/>#{WHITE} git checkout <branch name>#{COLOR_END}
 
-    # Create and checkout a newly named branch.
-    $:~/my_repo/>#{WHITE} git checkout -B <branch name>#{COLOR_END}
+# Create and checkout a newly named branch.
+# (will break if branch already exist)
+$:~/my_repo/>#{WHITE} git checkout -b <branch name>#{COLOR_END}
+
+# Create and checkout a newly named branch
+# (will checkout branch if already exist)
+$:~/my_repo/>#{WHITE} git checkout -B <branch name>#{COLOR_END}
     
-    # Discard any uncommitted modifications and move the file back to the HEAD.
-    $:~/my_repo/>#{WHITE} git checkout -- <file name>#{COLOR_END} 
+# Discard any uncommitted modifications and move the file back to the HEAD.
+$:~/my_repo/>#{WHITE} git checkout -- <file name>#{COLOR_END} 
+
+# Checkout a specific commit to a detached HEAD state
+$:~/my_repo/>#{WHITE} git checkout <commit>#{COLOR_END}
 
   EOS
 end
 
 section "Now to bring the fun ..." do
-  slide <<-EOS, :block
-    #{WHITE}Git Clone
-    ---------#{COLOR_END}
-    The essential git command. 
-
-    Similar to 'svn checkout' in that it will locally clone a remote repo.
-
-    This major difference is that once a repo is cloned, all commits remain
-    local until explicitly pushed to the remote origin.
-
-    #{WHITE}git clone <path to repo>#{COLOR_END}
-  EOS
-
-  slide <<-EOS, :block
-    $:~/dev/>#{WHITE} git clone clokwork.net:/home/derek/repos/git-demo.git#{COLOR_END}
-    Initialized empty Git repository in /home/derek/dev/git-demo/.git
-    Checking out files: 100% (113/113), done.
-
-  EOS
-
   slide <<-EOS, :block
     #{WHITE}Git Remote
     ----------#{COLOR_END}
@@ -539,6 +551,39 @@ section "Now to bring the fun ..." do
     To git@github.com:clok/git-tuts.git
        20f47b7..9b404fb  master -> master
   EOS
+
+  slide <<-EOS, :block
+    #{WHITE}The Stash Hash
+    --------------#{COLOR_END}
+    The #{WHITE}git stash#{COLOR_END} command will move unstaged changes to stash hash
+    within the local repo.
+
+    This will reset the repo back to HEAD. 
+
+    A useful tool when merge conflicts arise or you just want to quickly discard
+    changes. 
+
+    The stash hash can be accessed at anytime within git and will always be
+    there unless you drop the stash.
+  EOS
+
+  slide <<-EOS, :block
+    # Move uncommitted changes to stash hash
+    $:~/my_repo/>#{WHITE} git stash#{COLOR_END}
+    Saved working directory and index state WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
+    HEAD is now at 42b6efc Added sanitize functions for table mode in Parser.pm
+    
+    # List all available stash objects
+    $:~/my_repo/>#{WHITE} git stash list#{COLOR_END}
+    stash@{0}: WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
+    stash@{1}: WIP on v4: 4bfd79e Updated documentation for DeviceAtlas.pm
+    stash@{2}: WIP on master: 3fa9ee6 Added logging
+    stash@{3}: WIP on v2.0: f8f1f98 Testing out RedisDB.pm
+    
+  EOS
+end
+
+section "Thank you! Questions?" do
 end
 
 section "... More Advanced Fun ..." do
@@ -604,36 +649,6 @@ section "... More Advanced Fun ..." do
     # Fetch the code for the submodules
     $:~/some/dir>#{WHITE} git submodule update#{COLOR_END}
 
-  EOS
-
-  slide <<-EOS, :block
-    #{WHITE}The Stash Hash
-    --------------#{COLOR_END}
-    The #{WHITE}git stash#{COLOR_END} command will move unstaged changes to stash hash
-    within the local repo.
-
-    This will reset the repo back to HEAD. 
-
-    A useful tool when merge conflicts arise or you just want to quickly discard
-    changes. 
-
-    The stash hash can be accessed at anytime within git and will always be
-    there unless you drop the stash.
-  EOS
-
-  slide <<-EOS, :block
-    # Move uncommitted changes to stash hash
-    $:~/my_repo/>#{WHITE} git stash#{COLOR_END}
-    Saved working directory and index state WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
-    HEAD is now at 42b6efc Added sanitize functions for table mode in Parser.pm
-    
-    # List all available stash objects
-    $:~/my_repo/>#{WHITE} git stash list#{COLOR_END}
-    stash@{0}: WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
-    stash@{1}: WIP on v4: 4bfd79e Updated documentation for DeviceAtlas.pm
-    stash@{2}: WIP on master: 3fa9ee6 Added logging
-    stash@{3}: WIP on v2.0: f8f1f98 Testing out RedisDB.pm
-    
   EOS
 
   slide <<-EOS, :block
