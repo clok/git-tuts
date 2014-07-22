@@ -120,7 +120,7 @@ section "The Git Repo Basics" do
   slide <<-EOS, :block
     #{WHITE}Git Init
     --------#{COLOR_END}
-    To initialize a new simply use 'git init'
+    To initialize a new repo simply use #{WHITE}git init#{COLOR_END}
 
     This will initialize an empty repo in the current working directory.
 
@@ -141,8 +141,8 @@ section "The Git Repo Basics" do
 
     Use this to determine what needs to be staged for commit.
 
-    If a file meets the criteria in .gitignore then it will not be displayed in
-    the status message.
+    If a file meets a criterion in .gitignore then it will not be displayed in
+    the status message unless it tracked within the repo.
 
   EOS
 
@@ -155,7 +155,7 @@ section "The Git Repo Basics" do
     Untracked files:
       (use "git add <file>..." to include in what will be committed)
 
-      #{RED}hello_git.txt#{COLOR_END}
+        #{RED}hello_git.txt#{COLOR_END}
 
     nothing added to commit but untracked files present (use "git add" to track)
 
@@ -164,7 +164,7 @@ section "The Git Repo Basics" do
 
   slide <<-EOS, :block
     #{WHITE}Git Diff
-    ----------#{COLOR_END}
+    --------#{COLOR_END}
     Produces diff of all modified tracked files within a repo.
 
     Use this to determine what changes will be staged for commit.
@@ -217,8 +217,8 @@ index 15a8e23..e5c9666 100644
     Changes to be committed:
       (use "git reset HEAD <file>..." to unstage)
     
-      #{GREEN}new file:   new-file.pl
-      new file:   new-file.rb#{COLOR_END}
+        #{GREEN}new file:   new-file.pl
+        new file:   new-file.rb#{COLOR_END}
 
     $:~/my_repo/> 
   EOS
@@ -257,7 +257,7 @@ Quiting the editor, w/o saving, will cancel the commit.
     ------#{COLOR_END}
     Remove a tracked file from version control and the file system.
 
-    If a file is not tracked within the repo, 'git rm' will ignore the file.
+    If a file is not tracked within the repo, #{WHITE}git rm#{COLOR_END} will ignore the file.
 
    EOS
 
@@ -269,12 +269,11 @@ Quiting the editor, w/o saving, will cancel the commit.
     rm 'file_to_delete'
     
     $:~/my_repo/>#{WHITE} git status#{COLOR_END}
-    # On branch master
-    # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
-    #
-    #	deleted:    file_to_delete
-    #
+    On branch master
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+
+        #{GREEN}deleted:    file_to_delete#{COLOR_END}
     
     $:~/my_repo/>#{WHITE} git commit -m "Removed file_to_delete from repo"#{COLOR_END}
     [master 40f4fd4] Removed file_to_delete from repo
@@ -310,7 +309,7 @@ section "Let's Recap" do
   EOS
 end
 
-section "Cloning a Repository" do
+section "Working with a Repository" do
   slide <<-EOS, :center
     THIS IS A PLACE HOLDER
   EOS
@@ -318,6 +317,7 @@ section "Cloning a Repository" do
   slide <<-EOS, :block
 #{WHITE}Clone a repository from a remote
 --------------------------------#{COLOR_END}
+
 $:~/github>#{WHITE} git clone git@github.com:git/git.git#{COLOR_END}
 Cloning into 'git'...
 remote: Counting objects: 174834, done.
@@ -352,6 +352,151 @@ $:~/github/git (git::master)>#{WHITE} git branch -a#{COLOR_END}
   remotes/origin/pu
   remotes/origin/todo#{COLOR_END}
 
+  EOS
+
+  slide <<-EOS, :block
+#{WHITE}Git log
+-------#{COLOR_END}
+
+#{git log} is a versitile command for viewing local and remote history.
+
+Standard command will open the commit history for the working branch that
+is interactive and serachable.
+
+  EOS
+
+  slide <<-EOS, :block
+# View incoming commits from a branch (can be remote)
+
+$:~/github/fast-export (git::master)>#{WHITE} git log HEAD..origin/master#{COLOR_END}
+#{BLUE}commit 1d85321bdb35cfe7c056ca4c6249d252348a1fec#{COLOR_END}
+Author: Piotr Święcicki <swietopel@gmail.com>
+Date:   Tue Apr 22 23:00:44 2014 +0200
+
+    Annotate commits with the hg hash as git notes in the hg namespace
+
+    If the --hg-hash argument is given, the converted commits are
+    annotated with the original hg hash as a git note in the "hg"
+    namespace.
+
+    The notes can be shown by git log using the "--notes=hg" argument.
+  EOS
+
+  slide <<-EOS, :block
+# View outgoing commits from a branch (can be remote)
+
+$:~/github/fast-export (git::master)>#{WHITE} git log origin/master..HEAD#{COLOR_END}
+#{BLUE}commit cda7e0d684652d077c9b5b9c89e13dce8733d4ee#{COLOR_END}
+Author: Derek Smith <derek@clokwork.net>
+Date:   Mon Jul 21 21:52:02 2014 -0500
+
+    Added a new .tmp file for some reason
+
+  EOS
+
+  slide <<-EOS, :block
+#{WHITE}Git Fetch
+---------#{COLOR_END}
+Retrieve updates from a remote repo.
+    
+# Fetch all remote/branches
+#{WHITE}git fetch#{COLOR_END}
+
+# Fetch only a specific remote/branch
+#{WHITE}git fetch <remote alias> <branch name>#{COLOR_END}
+
+  EOS
+
+  slide <<-EOS, :block
+#{WHITE}Git Merge
+---------#{COLOR_END}
+Straight forward, merge branch into current working branch.
+
+Git merges are VERY fast and VERY cheap.
+
+By default, git will attempt to #{BLUE}fast-forward#{COLOR_END} the merge.
+
+A #{BLUE}fast-forward#{COLOR_END} merge will not create a merge commit. It will fail if there
+are any merge conflicts.
+
+Use #{WHITE}--no-ff#{COLOR_END} to have a merge commit created.
+  EOS
+
+  slide <<-EOS, :block
+# Perform the fetch 
+$:~/github/redis/>#{WHITE} git fetch origin unstable#{COLOR_END}
+From git://github.com/antirez/redis
+  * branch            unstable   -> FETCH_HEAD
+
+# Then merge the fetched code
+$:~/github/redis/>#{WHITE} git merge origin/unstable#{COLOR_END}
+Updating be6cbd3..d7740fc
+Fast-forward
+  CONTRIBUTING                                                   |    7 #{GREEN}++#{COLOR_END}
+  COPYING                                                        |    2 #{GREEN}+#{COLOR_END}#{RED}-#{COLOR_END}
+   ...
+  utils/install_server.sh                                        |    2 #{GREEN}+#{COLOR_END}
+  132 files changed, 4403 insertions(+), 1007 deletions(-)
+  EOS
+
+  slide <<-EOS, :block
+#{WHITE}Git Pull
+--------#{COLOR_END}
+A 'fetch + merge' in one command.
+
+This is not recommended for standard use when working with an active codebase.
+  EOS
+
+  slide <<-EOS, :block
+# Perform the pull 
+$:~/github/redis/>#{WHITE} git pull origin unstable#{COLOR_END}
+remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 7 (delta 4), reused 5 (delta 2)
+Unpacking objects: 100% (7/7), done.
+From git://github.com/antirez/redis
+    776d987..a785986  master     -> origin/unstable
+Updating 776d987..a785986
+Fast-forward
+  README.markdown |   28 #{GREEN}++++++++++++++++++++++++++++#{COLOR_END}
+  1 file changed, 28 insertions(+)
+  EOS
+
+  slide <<-EOS, :block
+#{WHITE}Git Push
+--------#{COLOR_END}
+Attempt to push all commits in local repo to remote repo.
+
+This will fail if the remote repo is ahead of the local repo.
+
+  EOS
+
+  slide <<-EOS, :block
+# Perform the push
+$:~/github/git-demo/>#{WHITE} git push github master#{COLOR_END}
+Counting objects: 8, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 4.00 KiB, done.
+Total 5 (delta 3), reused 0 (delta 0)
+To git@github.com:clok/git-tuts.git
+    20f47b7..9b404fb  master -> master
+  EOS
+end
+
+section "Let's Recap... Again" do
+  slide <<-EOS, :block
+#{WHITE}Remote Workflow
+---------------#{COLOR_END}
+
+# Incoming
+1. #{WHITE}git log <local_branch>..<remote/local_branch>#{COLOR_END} to view incoming commits.
+2. #{WHITE}git fetch#{COLOR_END} to retrieve changesets from remote.
+3. #{WHITE}git merge#{COLOR_END} to merge the retrieved changeset.
+
+# Outgoing
+1. #{WHITE}git log <remote/local_branch>..<local_branch>#{COLOR_END} to view outgoing commits.
+2. #{WHITE}git push <remote_alias> <branch>#{COLOR_END} to push committed changes to remote.
   EOS
 end
 
@@ -437,122 +582,6 @@ end
 
 section "Now to bring the fun ..." do
   slide <<-EOS, :block
-    #{WHITE}Git Remote
-    ----------#{COLOR_END}
-    The next essential git command.
-
-    Remote allows you to add and remove remote repo paths.
-
-    Essential for synchronizing multiple machines and repos.
-
-  EOS
-
-  slide <<-EOS, :block
-    # Add a new remote repo
-    $:~/stash/git-demo/>#{WHITE} git remote add github git@github.com:clok/git-tuts.git#{COLOR_END}
-
-    # List all remote linked repos
-    $:~/stash/git-demo/>#{WHITE} git remote -v#{COLOR_END}
-    github	git@github.com:clok/git-tuts.git (fetch)
-    github	git@github.com:clok/git-tuts.git (push)
-    origin	derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
-    origin	derek@clokwork.net:/mnt/repos/git-demo.git (push)
-
-    # Remove a remote repo link
-    $:~/stash/git-demo/>#{WHITE} git remote rm github#{COLOR_END}
-  EOS
-
-  slide <<-EOS, :block
-    #{WHITE}Git Fetch
-    ---------#{COLOR_END}
-    Check and retrieve an update from a remote repo and branch.
-
-    The update will be stored in a branch called '<remote>/<branch>'
-    
-    # Fetch all remote/branches
-    #{WHITE}git fetch#{COLOR_END}
-
-    # Fetch only a specific remote/branch
-    #{WHITE}git fetch <remote name> <branch name>#{COLOR_END}
-
-  EOS
-
-  slide <<-EOS, :block
-    #{WHITE}Git Merge
-    ---------#{COLOR_END}
-    Straight forward, merge branch into current working branch.
-
-    Git merges are VERY fast.
-
-    By default, git will attempt to "fast-forward" the merge.
-
-    A fast-forward merge is a merge where the pointers are adjusted, but no
-    merge commit is created.
-
-    Use '--no-ff' to have a merge commit created.
-  EOS
-
-  slide <<-EOS, :block
-    # Perform the fetch 
-    $:~/github/redis/>#{WHITE} git fetch origin unstable#{COLOR_END}
-    From git://github.com/antirez/redis
-     * branch            unstable   -> FETCH_HEAD
-
-    # Then merge the fetched code
-    $:~/github/redis/>#{WHITE} git merge origin/unstable#{COLOR_END}
-    Updating be6cbd3..d7740fc
-    Fast-forward
-     CONTRIBUTING                                                   |    7 ++
-     COPYING                                                        |    2 +-
-    ...
-     utils/install_server.sh                                        |    2 +
-    132 files changed, 4403 insertions(+), 1007 deletions(-)
-  EOS
-
-  slide <<-EOS, :block
-    #{WHITE}Git Pull
-    --------#{COLOR_END}
-    Basically a 'fetch + merge'
-
-    Similar in function to 'svn update'
-  EOS
-
-  slide <<-EOS, :block
-    # Perform the pull 
-    $:~/github/redis/>#{WHITE} git pull origin unstable#{COLOR_END}
-    remote: Counting objects: 9, done.
-    remote: Compressing objects: 100% (5/5), done.
-    remote: Total 7 (delta 4), reused 5 (delta 2)
-    Unpacking objects: 100% (7/7), done.
-    From git://github.com/antirez/redis
-       776d987..a785986  master     -> origin/unstable
-    Updating 776d987..a785986
-    Fast-forward
-     README.markdown |   28 ++++++++++++++++++++++++++++
-     1 file changed, 28 insertions(+)
-  EOS
-
-  slide <<-EOS, :block
-    #{WHITE}Git Push
-    --------#{COLOR_END}
-    Attempt to push all commits in local repo to remote repo.
-
-    Similar in function to 'svn commit'
-  EOS
-
-  slide <<-EOS, :block
-    # Perform the push
-    $:~/github/git-demo/>#{WHITE} git push github master#{COLOR_END}
-    Counting objects: 8, done.
-    Delta compression using up to 8 threads.
-    Compressing objects: 100% (5/5), done.
-    Writing objects: 100% (5/5), 4.00 KiB, done.
-    Total 5 (delta 3), reused 0 (delta 0)
-    To git@github.com:clok/git-tuts.git
-       20f47b7..9b404fb  master -> master
-  EOS
-
-  slide <<-EOS, :block
     #{WHITE}The Stash Hash
     --------------#{COLOR_END}
     The #{WHITE}git stash#{COLOR_END} command will move unstaged changes to stash hash
@@ -581,6 +610,33 @@ section "Now to bring the fun ..." do
     stash@{3}: WIP on v2.0: f8f1f98 Testing out RedisDB.pm
     
   EOS
+
+  slide <<-EOS, :block
+    #{WHITE}Git Remote
+    ----------#{COLOR_END}
+    The next essential git command.
+
+    Remote allows you to add and remove remote repo paths.
+
+    Essential for synchronizing multiple machines and repos.
+
+  EOS
+
+  slide <<-EOS, :block
+    # Add a new remote repo
+    $:~/stash/git-demo/>#{WHITE} git remote add github git@github.com:clok/git-tuts.git#{COLOR_END}
+
+    # List all remote linked repos
+    $:~/stash/git-demo/>#{WHITE} git remote -v#{COLOR_END}
+    github  git@github.com:clok/git-tuts.git (fetch)
+    github  git@github.com:clok/git-tuts.git (push)
+    origin  derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
+    origin  derek@clokwork.net:/mnt/repos/git-demo.git (push)
+
+    # Remove a remote repo link
+    $:~/stash/git-demo/>#{WHITE} git remote rm github#{COLOR_END}
+  EOS
+
 end
 
 section "Thank you! Questions?" do
