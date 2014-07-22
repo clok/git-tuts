@@ -40,7 +40,7 @@ section "Paradigm Differences" do
 1. Cloning - get it all, but not in extracted form
 2. Only sync current working branch (by default)
 3. Keeping branches local is an easy possibility
-4. #{WHITE}hg subrepo#{COLOR_END} #{RED_BOLD}!=#{COLOR_END} #{WHITE}git subomdule#{COLOR_END}
+4. #{WHITE}hg subrepo#{COLOR_END} #{RED_BOLD}!=#{COLOR_END} #{WHITE}git submodule#{COLOR_END}
   EOS
 
     slide <<-EOS, :block
