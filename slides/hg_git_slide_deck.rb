@@ -22,7 +22,7 @@ section "- The Agenda -" do
   slide <<-EOS, :block
     #{BLUE}The Agenda
     ----------#{COLOR_END}
-    
+
     1. Paradigm Differences
     2. Configuration
     3. Basic Workflow 
@@ -41,6 +41,14 @@ section "Paradigm Differences" do
 2. Only sync current working branch (by default)
 3. Keeping branches local is an easy possibility
 4. #{WHITE}hg subrepo#{COLOR_END} #{RED_BOLD}!=#{COLOR_END} #{WHITE}git subomdule#{COLOR_END}
+  EOS
+
+    slide <<-EOS, :block
+#{BLUE}Between SVN & Git
+-----------------#{COLOR_END}
+1. Cloning - get it all, but not in extracted form
+2. Trunk/Sandbox vs. Repo/Branches
+3. Branching & Merging are CHEAP
   EOS
 end
 
