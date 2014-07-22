@@ -358,7 +358,7 @@ $:~/github/git (git::master)>#{WHITE} git branch -a#{COLOR_END}
 #{WHITE}Git log
 -------#{COLOR_END}
 
-#{git log} is a versitile command for viewing local and remote history.
+#{WHITE}git log#{COLOR_END} is a versitile command for viewing local and remote history.
 
 Standard command will open the commit history for the working branch that
 is interactive and serachable.
