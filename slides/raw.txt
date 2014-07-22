@@ -3,9 +3,9 @@
 
 
   Derek Smith
-  @clok, @derek-smith
 
-  Oversee.net
+  Github: @clok
+  Twitter: @cloksmith
 
   It is easy to shoot your foot off with git,
   but also easy to revert to a previous foot
@@ -37,7 +37,7 @@ Derek Smith
 $:~/> cat .gitconfig
 [user]
    name = Derek Smith
-   email = dsmith@oversee.net
+   email = derek@clokwork.net
     
 $:~/>
 
@@ -45,9 +45,9 @@ My typical .gitconfig
     
 [user]
    name = Derek Smith
-   email = dsmith@oversee.net
+   email = derek@clokwork.net
 [core]
-   excludesFile = /home/dsmith/.gitignore_global
+   excludesFile = /home/derek/.gitignore_global
    editor = emacs -nw
     
 
@@ -95,7 +95,7 @@ This will initialize an empty repo in the current working directory.
 Any global configurations you have set will be applied.
 
 $:~/my_repo/> git init
-Initialized empty Git repository in /home/dsmith/my_repo/.git/
+Initialized empty Git repository in /home/derek/my_repo/.git/
     
 $:~/my_repo/> 
 
@@ -168,7 +168,7 @@ create mode 100644 hello_git.txt
     
 $:~/my_repo/> git log
 commit 0bde0dddcc1107344e3bdbabc0cefb5a183c3a47
-Author: Derek Smith <dsmith@oversee.net>
+Author: Derek Smith <derek@clokwork.net>
 Date:   Wed Jan 9 12:18:28 2013 -0800
 
 NEATO commit message
@@ -222,8 +222,8 @@ $:~/my_repo/> git branch
 
 # List all remote branches
 $:~/dev/malarkey> git branch -r
-  github.corp/master
-  github.corp/v4
+  stash.internal/master
+  stash.internal/v4
   origin/master
   origin/v4
 
@@ -257,8 +257,8 @@ local until explicitly pushed to the remote origin.
 
 git clone <path to repo>
 
-$:~/dev/> git clone dsmith.dev:/home/dsmith/repos/git-demo.git
-Initialized empty Git repository in /home/dsmith/dev/git-demo/.git
+$:~/dev/> git clone clokwork.net:/home/derek/repos/git-demo.git
+Initialized empty Git repository in /home/derek/dev/git-demo/.git
 Checking out files: 100% (113/113), done.
 
 
@@ -272,17 +272,17 @@ Essential for synchronizing multiple machines and repos.
 
 
 # Add a new remote repo
-$:~/github.corp/git-demo/> git remote add github git@github.com:clok/git-tuts.git
+$:~/stash.internal/git-demo/> git remote add github git@github.com:clok/git-tuts.git
 
 # List all remote linked repos
-$:~/github.corp/git-demo/> git remote -v
+$:~/stash.internal/git-demo/> git remote -v
 github	git@github.com:clok/git-tuts.git (fetch)
 github	git@github.com:clok/git-tuts.git (push)
-origin	dsmith@dsmith.dev.corp.oversee.net:~/repos/git-demo.git (fetch)
-origin	dsmith@dsmith.dev.corp.oversee.net:~/repos/git-demo.git (push)
+origin	derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
+origin	derek@clokwork.net:/mnt/repos/git-demo.git (push)
 
 # Remove a remote repo link
-$:~/github.corp/git-demo/> git remote rm github
+$:~/stash.internal/git-demo/> git remote rm github
 
 Git Fetch
 ---------

@@ -5,9 +5,9 @@ slide <<-EOS, :center
 
 
   Derek Smith
-  @clok, @derek-smith
-
-  Oversee.net
+  
+  Github: @clok
+  Twitter: @cloksmith
 EOS
 
 slide <<-EOS, :center
@@ -42,7 +42,7 @@ section "Basic Configuration Files" do
     $:~/>\e[1m cat .gitconfig\e[0m
     [user]
        name = Derek Smith
-       email = dsmith@oversee.net
+       email = derek@clokwork.net
     
     $:~/>
   EOS
@@ -52,9 +52,9 @@ section "Basic Configuration Files" do
     
     [user]
        name = Derek Smith
-       email = dsmith@oversee.net
+       email = derek@clokwork.net
     [core]
-       excludesFile = /home/dsmith/.gitignore_global
+       excludesFile = /home/derek/.gitignore_global
        editor = emacs -nw
     
   EOS
@@ -100,7 +100,7 @@ section "The Git Repo Basics" do
 
   slide <<-EOS, :block
     $:~/my_repo/>\e[1m git init\e[0m
-    Initialized empty Git repository in /home/dsmith/my_repo/.git/
+    Initialized empty Git repository in /home/derek/my_repo/.git/
     
     $:~/my_repo/> 
   EOS
@@ -145,7 +145,7 @@ section "The Git Repo Basics" do
     
     $:~/my_repo/>\e[1m git log\e[0m
     commit 0bde0dddcc1107344e3bdbabc0cefb5a183c3a47
-    Author: Derek Smith <dsmith@oversee.net>
+    Author: Derek Smith <derek@clokwork.net>
     Date:   Wed Jan 9 12:18:28 2013 -0800
 
         NEATO commit message
@@ -190,8 +190,8 @@ section "The Git Repo Basics" do
 
     # List all remote branches
     $:~/dev/malarkey>\e[1m git branch -r\e[0m
-      github.corp/master
-      github.corp/v4
+      stash.internal/master
+      stash.internal/v4
       origin/master
       origin/v4
 
@@ -225,8 +225,8 @@ section "Now to bring the fun ..." do
   EOS
 
   slide <<-EOS, :block
-    $:~/dev/>\e[1m git clone dsmith.dev:/home/dsmith/repos/git-demo.git\e[0m
-    Initialized empty Git repository in /home/dsmith/dev/git-demo/.git
+    $:~/dev/>\e[1m git clone clokwork.net:/home/derek/repos/git-demo.git\e[0m
+    Initialized empty Git repository in /home/derek/dev/git-demo/.git
     Checking out files: 100% (113/113), done.
 
   EOS
@@ -244,17 +244,17 @@ section "Now to bring the fun ..." do
 
   slide <<-EOS, :block
     # Add a new remote repo
-    $:~/github.corp/git-demo/>\e[1m git remote add github git@github.com:clok/git-tuts.git\e[0m
+    $:~/stash.internal/git-demo/>\e[1m git remote add github git@github.com:clok/git-tuts.git\e[0m
 
     # List all remote linked repos
-    $:~/github.corp/git-demo/>\e[1m git remote -v\e[0m
+    $:~/stash.internal/git-demo/>\e[1m git remote -v\e[0m
     github	git@github.com:clok/git-tuts.git (fetch)
     github	git@github.com:clok/git-tuts.git (push)
-    origin	dsmith@dsmith.dev.corp.oversee.net:~/repos/git-demo.git (fetch)
-    origin	dsmith@dsmith.dev.corp.oversee.net:~/repos/git-demo.git (push)
+    origin	derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
+    origin	derek@clokwork.net:/mnt/repos/git-demo.git (push)
 
     # Remove a remote repo link
-    $:~/github.corp/git-demo/>\e[1m git remote rm github\e[0m
+    $:~/stash.internal/git-demo/>\e[1m git remote rm github\e[0m
   EOS
 
   slide <<-EOS, :block

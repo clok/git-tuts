@@ -10,7 +10,7 @@ Minimal Contents:
 ```
 [user]
 	name = John Doe
-	email = jdoe@oversee.net
+	email = jdoe@gmail.com
 ```
 
 Useful *[core]* attributes to use:
@@ -22,7 +22,7 @@ Sample:
 ```
 [user]
 	name = John Doe
-	email = jdoe@oversee.net
+	email = jdoe@gmail.com
 [core]
 	excludesFile = /home/jdoe/.gitignore_global
 	editor = emacs -nw
