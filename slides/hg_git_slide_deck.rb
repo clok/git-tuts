@@ -20,15 +20,30 @@ EOS
 # Agenda
 section "- The Agenda -" do
   slide <<-EOS, :block
-    #{WHITE}The Agenda
+    #{BLUE}The Agenda
     ----------#{COLOR_END}
-    1. Git Configuration
-    2. Git Repo Basics
-    3. Advanced Git
-    4. Q & A
+    
+    1. Paradigm Differences
+    2. Configuration
+    3. Basic Workflow 
+    4. Working with Remote Repos
+    5. Branch & Tracking
+    6. Q & A
 
   EOS
 end
+
+section "Paradigm Differences" do
+  slide <<-EOS, :block
+#{BLUE}Between Mercurial & Git
+-----------------------#{COLOR_END}
+1. Cloning - get it all, but not in extracted form
+2. Only sync current working branch (by default)
+3. Keeping branches local is an easy possibility
+4. #{WHITE}hg subrepo#{COLOR_END} #{RED_BOLD}!=#{COLOR_END} #{WHITE}git subomdule#{COLOR_END}
+  EOS
+end
+
 
 slide <<-EOS, :center
   It is easy to shoot your foot off with git,
@@ -186,7 +201,6 @@ index 15a8e23..e5c9666 100644
   - random three-letter combination that is pronounceable, and not
     actually used by any common UNIX command.  The fact that it is a
     mispronunciation of "get" may or may not be relevant.
-}
 #{BLUE}@@ -13,7 +14,6 @@#{COLOR_END}
     dictionary of slang.
   - "global information tracker": you're in a good mood, and it actually
@@ -300,7 +314,7 @@ end
 
 section "Let's Recap" do
   slide <<-EOS, :block
-#{WHITE}Basic Workflow
+#{BLUE}Basic Workflow
 --------------#{COLOR_END}
 1. #{WHITE}git status#{COLOR_END} to view all files changed, untracked or deleted.
 2. #{WHITE}git diff <file>#{COLOR_END} to view the delta to be committed.
@@ -315,7 +329,7 @@ section "Working with a Repository" do
   EOS
 
   slide <<-EOS, :block
-#{WHITE}Clone a repository from a remote
+#{BLUE}Clone a repository from a remote
 --------------------------------#{COLOR_END}
 
 $:~/github>#{WHITE} git clone git@github.com:git/git.git#{COLOR_END}
@@ -366,7 +380,8 @@ is interactive and serachable.
   EOS
 
   slide <<-EOS, :block
-# View incoming commits from a branch (can be remote)
+#{BLUE}View incoming commits from a branch (can be remote)
+---------------------------------------------------#{COLOR_END}
 
 $:~/github/fast-export (git::master)>#{WHITE} git log HEAD..origin/master#{COLOR_END}
 #{BLUE}commit 1d85321bdb35cfe7c056ca4c6249d252348a1fec#{COLOR_END}
@@ -383,7 +398,8 @@ Date:   Tue Apr 22 23:00:44 2014 +0200
   EOS
 
   slide <<-EOS, :block
-# View outgoing commits from a branch (can be remote)
+#{BLUE}View outgoing commits from a branch (can be remote)
+---------------------------------------------------#{COLOR_END}
 
 $:~/github/fast-export (git::master)>#{WHITE} git log origin/master..HEAD#{COLOR_END}
 #{BLUE}commit cda7e0d684652d077c9b5b9c89e13dce8733d4ee#{COLOR_END}
@@ -448,7 +464,9 @@ This is not recommended for standard use when working with an active codebase.
   EOS
 
   slide <<-EOS, :block
-# Perform the pull 
+#{BLUE}Perform the pull
+----------------#{COLOR_END}
+
 $:~/github/redis/>#{WHITE} git pull origin unstable#{COLOR_END}
 remote: Counting objects: 9, done.
 remote: Compressing objects: 100% (5/5), done.
@@ -472,7 +490,9 @@ This will fail if the remote repo is ahead of the local repo.
   EOS
 
   slide <<-EOS, :block
-# Perform the push
+#{BLUE}Perform the push
+----------------#{COLOR_END}
+
 $:~/github/git-demo/>#{WHITE} git push github master#{COLOR_END}
 Counting objects: 8, done.
 Delta compression using up to 8 threads.
@@ -490,8 +510,8 @@ section "Let's Recap... Again" do
 ---------------#{COLOR_END}
 
 # Incoming
-1. #{WHITE}git log <local_branch>..<remote/local_branch>#{COLOR_END} to view incoming commits.
-2. #{WHITE}git fetch#{COLOR_END} to retrieve changesets from remote.
+1. #{WHITE}git fetch#{COLOR_END} to retrieve changesets from remote.
+2. #{WHITE}git log <local_branch>..<remote/local_branch>#{COLOR_END} to view incoming commits.
 3. #{WHITE}git merge#{COLOR_END} to merge the retrieved changeset.
 
 # Outgoing
@@ -506,11 +526,14 @@ section "Branching & Tracking" do
 ----------#{COLOR_END}
 Branching is fast and simple within git.
 
-When a remote branched is checked out on a local copy it forms a tracked pair
-with the local and remote branch. What this means is that you will be notfied
-of branch changes on the remote after the changes have been fetched. Also,
-this means that when you push your changes to that branch, it will default to
-the tracked branch.
+When a remote branch is checked out on a local copy it forms a tracked pair
+with the local and remote branch.
+
+What this means is that you will be notfied of branch changes on the remote
+after the changes have been fetched.
+
+If you create a new local branch and push your changes, it will default to
+a tracked branch on the remote you pushed to.
   EOS
 
   slide <<-EOS, :block
@@ -555,6 +578,8 @@ section "Git Checkout" do
 #{WHITE}Git Checkout
 ------------#{COLOR_END}
 
+Remember the Swiss Army Knife comment earlier?
+
 #{GREEN}git checkout#{COLOR_END} = #{BLUE}hg branch#{COLOR_END} + #{BLUE}hg update#{COLOR_END} + #{BLUE}hg revert#{COLOR_END}
 
   EOS
@@ -564,30 +589,30 @@ section "Git Checkout" do
 $:~/my_repo/>#{WHITE} git checkout <branch name>#{COLOR_END}
 
 # Create and checkout a newly named branch.
-# (will break if branch already exist)
+# #{RED}(will break if branch already exist)#{COLOR_END}
 $:~/my_repo/>#{WHITE} git checkout -b <branch name>#{COLOR_END}
 
 # Create and checkout a newly named branch
-# (will checkout branch if already exist)
+# #{RED}(will checkout branch if already exist)#{COLOR_END}
 $:~/my_repo/>#{WHITE} git checkout -B <branch name>#{COLOR_END}
     
 # Discard any uncommitted modifications and move the file back to the HEAD.
 $:~/my_repo/>#{WHITE} git checkout -- <file name>#{COLOR_END} 
 
-# Checkout a specific commit to a detached HEAD state
+# Checkout a specific commit to a #{RED_BOLD}detached HEAD#{COLOR_END} state
 $:~/my_repo/>#{WHITE} git checkout <commit>#{COLOR_END}
 
   EOS
 end
 
-section "Now to bring the fun ..." do
+section "Some fun tools to use ..." do
   slide <<-EOS, :block
     #{WHITE}The Stash Hash
     --------------#{COLOR_END}
     The #{WHITE}git stash#{COLOR_END} command will move unstaged changes to stash hash
     within the local repo.
 
-    This will reset the repo back to HEAD. 
+    This will reset the repo back to #{RED_BOLD}HEAD#{COLOR_END}. 
 
     A useful tool when merge conflicts arise or you just want to quickly discard
     changes. 
@@ -597,12 +622,14 @@ section "Now to bring the fun ..." do
   EOS
 
   slide <<-EOS, :block
-    # Move uncommitted changes to stash hash
+    #{BLUE}Move uncommitted changes to stash hash#{COLOR_END}
+
     $:~/my_repo/>#{WHITE} git stash#{COLOR_END}
     Saved working directory and index state WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
     HEAD is now at 42b6efc Added sanitize functions for table mode in Parser.pm
     
-    # List all available stash objects
+    #{BLUE}List all available stash objects#{COLOR_END}
+
     $:~/my_repo/>#{WHITE} git stash list#{COLOR_END}
     stash@{0}: WIP on master: 42b6efc Added sanitize functions for table mode in Parser.pm
     stash@{1}: WIP on v4: 4bfd79e Updated documentation for DeviceAtlas.pm
@@ -614,27 +641,63 @@ section "Now to bring the fun ..." do
   slide <<-EOS, :block
     #{WHITE}Git Remote
     ----------#{COLOR_END}
-    The next essential git command.
+    An essential git command.
 
     Remote allows you to add and remove remote repo paths.
-
-    Essential for synchronizing multiple machines and repos.
 
   EOS
 
   slide <<-EOS, :block
-    # Add a new remote repo
+    #{BLUE}Add a new remote repo#{COLOR_END}
+
     $:~/stash/git-demo/>#{WHITE} git remote add github git@github.com:clok/git-tuts.git#{COLOR_END}
 
-    # List all remote linked repos
+    #{BLUE}List all remote linked repos#{COLOR_END}
+
     $:~/stash/git-demo/>#{WHITE} git remote -v#{COLOR_END}
     github  git@github.com:clok/git-tuts.git (fetch)
     github  git@github.com:clok/git-tuts.git (push)
     origin  derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
     origin  derek@clokwork.net:/mnt/repos/git-demo.git (push)
 
-    # Remove a remote repo link
+    #{BLUE}Remove a remote repo link#{COLOR_END}
+
     $:~/stash/git-demo/>#{WHITE} git remote rm github#{COLOR_END}
+    $:~/stash/git-demo/>#{WHITE} git remote -v#{COLOR_END}
+    origin  derek@clokwork.net:/mnt/repos/git-demo.git (fetch)
+    origin  derek@clokwork.net:/mnt/repos/git-demo.git (push)
+  EOS
+
+  slide <<-EOS, :block
+    #{WHITE}Detached Checkout
+    -----------------#{COLOR_END}
+    
+    #{WHITE}git checkout <commit>#{COLOR_END}
+    
+    Checkout a commit into a detached state from the commit tree.
+
+    Will not have the ability to commit back to the repo unless given
+    a new branch name.
+
+    The new branch will be created off of the commit that was detached.
+
+    Useful for code inspection and experimentation.
+  EOS
+
+  slide <<-EOS, :block
+    $:~/my_repo/>#{WHITE} git checkout f14c2d8240e7861902d4d0d481b9a04f3e567b3c#{COLOR_END}
+    Note: checking out 'f14c2d8240e7861902d4d0d481b9a04f3e567b3c'.
+
+    You are in 'detached HEAD' state. You can look around, make experimental
+    changes and commit them, and you can discard any commits you make in this
+    state without impacting any branches by performing another checkout.
+
+    If you want to create a new branch to retain commits you create, you may
+    do so (now or later) by using -b with the checkout command again. Example:
+
+      git checkout -b new_branch_name
+
+    HEAD is now at f14c2d8... Added analytics_table.pl build scripts
   EOS
 
 end
@@ -667,7 +730,7 @@ section "... More Advanced Fun ..." do
     NOTE:
     External code under git version control should NEVER be copied to a local repo.
 
-    Use 'git submodule' to link the desired external code to your repo.
+    Use #{WHITE}git submodule#{COLOR_END} to link the desired external code to your repo.
 
     If you need to modify the code in the submodule, then fork it and have a blast!
   EOS
@@ -705,34 +768,6 @@ section "... More Advanced Fun ..." do
     # Fetch the code for the submodules
     $:~/some/dir>#{WHITE} git submodule update#{COLOR_END}
 
-  EOS
-
-  slide <<-EOS, :block
-    #{WHITE}Detached Checkout
-    -----------------#{COLOR_END}
-    Checkout a named branch in a detached state.
-
-    Will not have the ability to commit back to the repo unless given a name.
-
-    Useful for code inspection and experimentation.
-
-    #{WHITE}git checkout <commit>#{COLOR_END}
-  EOS
-
-  slide <<-EOS, :block
-    $:~/my_repo/>#{WHITE} git checkout f14c2d8240e7861902d4d0d481b9a04f3e567b3c#{COLOR_END}
-    Note: checking out 'f14c2d8240e7861902d4d0d481b9a04f3e567b3c'.
-
-    You are in 'detached HEAD' state. You can look around, make experimental
-    changes and commit them, and you can discard any commits you make in this
-    state without impacting any branches by performing another checkout.
-
-    If you want to create a new branch to retain commits you create, you may
-    do so (now or later) by using -b with the checkout command again. Example:
-
-      git checkout -b new_branch_name
-
-    HEAD is now at f14c2d8... Added analytics_table.pl build scripts
   EOS
 
   slide <<-EOS, :block
