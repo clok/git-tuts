@@ -7,6 +7,14 @@ GREEN = "\033[0;32m"
 BLUE = "\033[01;34m"
 RED_BOLD = "\033[01;31m"
 
+def header(str, color)
+  line = ''
+  str.length.times do
+    line += '-'
+  end
+  Kernel.const_get(color.upcase) + str + "\n" + line + COLOR_END
+end
+
 slide <<-EOS, :center
   #{WHITE}Git 101: An Introduction to Git#{COLOR_END}
 
@@ -20,23 +28,20 @@ EOS
 # Agenda
 section "- The Agenda -" do
   slide <<-EOS, :block
-    #{BLUE}The Agenda
-    ----------#{COLOR_END}
-
-    1. Paradigm Differences
-    2. Configuration
-    3. Basic Workflow 
-    4. Working with Remote Repos
-    5. Branch & Tracking
-    6. Q & A
+#{header('The Agenda', 'blue')}
+1. Paradigm Differences
+2. Configuration
+3. Basic Workflow 
+4. Working with Remote Repos
+5. Branch & Tracking
+6. Q & A
 
   EOS
 end
 
 section "Paradigm Differences" do
   slide <<-EOS, :block
-#{BLUE}Between Mercurial & Git
------------------------#{COLOR_END}
+#{header("Between Mercurial & Git", 'blue')}
 1. Cloning - get it all, but not in extracted form
 2. Only sync current working branch (by default)
 3. Keeping branches local is an easy possibility
@@ -45,8 +50,7 @@ section "Paradigm Differences" do
   EOS
 
     slide <<-EOS, :block
-#{BLUE}Between SVN & Git
------------------#{COLOR_END}
+#{header("Between SVN & Git", 'blue')}
 1. Pretty much everything.
 2. Trunk/Sandbox vs. Repo/Branches
 3. Branching & Merging are CHEAP
@@ -65,16 +69,15 @@ EOS
 # Basic Configuration
 section "Basic Configuration Files" do
   slide <<-EOS, :block
-    #{WHITE}Config File (.gitconfig)
-    ------------------------#{COLOR_END}
-    This is the basic config file that is globally set from the users home
-    directory. (ex. #{WHITE}/home/user/.gitconfig#{COLOR_END})
+#{header("Config File (.gitconfig)", 'white')}
+This is the basic config file that is globally set from the users home
+directory. (ex. #{WHITE}/home/user/.gitconfig#{COLOR_END})
 
-    You can add attributes to your .gitconfig by either editing the file
-    directly or through CLI inputs.
+You can add attributes to your .gitconfig by either editing the file
+directly or through CLI inputs.
 
-    It is recommended that you set your user name and email address at a 
-    global level.
+It is recommended that you set your user name and email address at a 
+global level.
 
   EOS
 
@@ -93,7 +96,7 @@ section "Basic Configuration Files" do
   EOS
 
   slide <<-EOS, :block
-    My typical .gitconfig
+    My typical #{WHITE}.gitconfig#{COLOR_END}
     
     [user]
        name = Derek Smith
@@ -105,15 +108,14 @@ section "Basic Configuration Files" do
   EOS
 
   slide <<-EOS, :block
-    #{WHITE}Git Ignore (.gitignore)
-    -----------------------#{COLOR_END}
-    Include file extensions, names and negations. 
+#{header("Git Ignore (.gitignore)", 'white')}
+Include file extensions, names and negations. 
 
-    You can set a global ignore if you like or you can add custom ignore files
-    per repo.
+You can set a global ignore if you like or you can add custom ignore files
+per repo.
 
-    Cool site to generate common #{WHITE}.gitignore#{COLOR_END} files:
-    #{WHITE}http://www.gitignore.io/#{COLOR_END}
+Cool site to generate common #{WHITE}.gitignore#{COLOR_END} files:
+#{WHITE}http://www.gitignore.io/#{COLOR_END}
 
   EOS
 
@@ -142,13 +144,12 @@ end
 # Git Repo Basics
 section "The Git Repo Basics" do
   slide <<-EOS, :block
-    #{WHITE}Git Init
-    --------#{COLOR_END}
-    To initialize a new repo simply use #{WHITE}git init#{COLOR_END}
+#{header("Git Init", 'white')}
+To initialize a new repo simply use #{WHITE}git init#{COLOR_END}
 
-    This will initialize an empty repo in the current working directory.
+This will initialize an empty repo in the current working directory.
 
-    Any global configurations you have set will be applied.
+Any global configurations you have set will be applied.
   EOS
 
   slide <<-EOS, :block
@@ -159,14 +160,13 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    #{WHITE}Git Status
-    ----------#{COLOR_END}
-    Produces report of all modified, deleted and untracked files within a repo.
+#{header("Git Status", 'white')}
+Produces report of all modified, deleted and untracked files within a repo.
 
-    Use this to determine what needs to be staged for commit.
+Use this to determine what needs to be staged for commit.
 
-    If a file meets a criterion in #{WHITE}.gitignore#{COLOR_END} then it will not be displayed in
-    the status message unless it tracked within the repo.
+If a file meets a criterion in #{WHITE}.gitignore#{COLOR_END} then it will not be displayed in
+the status message unless it tracked within the repo.
 
   EOS
 
@@ -187,23 +187,23 @@ section "The Git Repo Basics" do
   EOS
 
   slide <<-EOS, :block
-    #{WHITE}Git Diff
-    --------#{COLOR_END}
-    Produces diff of all modified tracked files within a repo.
+#{header("Git Diff", 'white')}#{COLOR_END}
+Produces diff of all modified tracked files within a repo.
 
-    Use this to determine what changes will be staged for commit.
+Use this to determine what changes will be staged for commit.
 
-    You can designate a specific diff tool in the #{WHITE}.gitconfig#{COLOR_END}
+You can designate a specific diff tool in the #{WHITE}.gitconfig#{COLOR_END}
 
-    #{BLUE}View diff of unstaged changes#{COLOR_END}
-    #{WHITE}git diff#{COLOR_END}
+#{BLUE}View diff of unstaged changes#{COLOR_END}
+#{WHITE}git diff#{COLOR_END}
 
-    #{BLUE}View diff of staged changes#{COLOR_END}
-    #{WHITE}git diff --cached#{COLOR_END}
+#{BLUE}View diff of staged changes#{COLOR_END}
+#{WHITE}git diff --cached#{COLOR_END}
   EOS
 
   slide <<-EOS, :block
 #{BLUE}View diff of unstaged changes#{COLOR_END}
+
 $:~/github/git #{RED_BOLD}(git::edit-readme)#{COLOR_END}>#{WHITE} git diff README#{COLOR_END}
 #{WHITE}diff --git a/README b/README
 index 15a8e23..e5c9666 100644
@@ -228,19 +228,17 @@ index 15a8e23..e5c9666 100644
   EOS
 
   slide <<-EOS, :block
-    #{WHITE}Git Add
-    -------#{COLOR_END}
-    Stage all modifications to previously committed files and to any new files
-    that you want to add to the repo. 
+#{header("Git Add", 'white')}#{COLOR_END}
+Stage all modifications to previously committed files and to any new files
+that you want to add to the repo. 
 
-    Performing this command on a directory will recursively add all files.
+Performing this command on a directory will recursively add all files.
 
   EOS
 
   slide <<-EOS, :block
     $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} ls#{COLOR_END}
     hello_git.txt	new-file.pl	modified-file.rb
-    
     $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git status#{COLOR_END}
     On branch demo
     
@@ -257,7 +255,6 @@ index 15a8e23..e5c9666 100644
         #{RED}new file:   new-file.pl#{COLOR_END}
 
     $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}> 
-
     $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git add new-file.* modified-file.rb#{COLOR_END}
     $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git status#{COLOR_END}
     On branch demo
@@ -271,8 +268,7 @@ index 15a8e23..e5c9666 100644
   EOS
 
   slide <<-EOS, :block
-#{WHITE}Git Commit
-----------#{COLOR_END}
+#{header("Git Commit", 'white')}
 Commit locally staged changes to the the local repo.
 
 #{WHITE}git commit#{COLOR_END} will open the editor set in either the
@@ -300,11 +296,10 @@ Quiting the editor, w/o saving, will cancel the commit.
   EOS
 
   slide <<-EOS, :block
-    #{WHITE}Git Rm
-    ------#{COLOR_END}
-    Remove a tracked file from version control and the file system.
+#{header("Git Rm", 'white')}
+Remove a tracked file from version control and the file system.
 
-    If a file is not tracked within the repo, #{WHITE}git rm#{COLOR_END} will ignore the file.
+If a file is not tracked within the repo, #{WHITE}git rm#{COLOR_END} will ignore the file.
 
    EOS
 
@@ -334,8 +329,7 @@ Quiting the editor, w/o saving, will cancel the commit.
   EOS
 
   slide <<-EOS, :block
-#{WHITE}Git Help
---------#{COLOR_END}
+#{header("Git Help", 'white')}
 Each git command is like a Swiss Army knife.
 
 #{GREEN}git checkout#{COLOR_END} = #{BLUE}hg branch#{COLOR_END} + #{BLUE}hg update#{COLOR_END} + #{BLUE}hg revert#{COLOR_END}
@@ -347,8 +341,7 @@ end
 
 section "Let's Recap" do
   slide <<-EOS, :block
-#{BLUE}Basic Workflow
---------------#{COLOR_END}
+#{header("Basic Workflow", 'blue')}
 1. #{WHITE}git status#{COLOR_END} to view all files changed, untracked or deleted.
 2. #{WHITE}git diff <file>#{COLOR_END} to view the delta to be committed.
 3. #{WHITE}git add <file>#{COLOR_END} to add file to staging area.
@@ -383,8 +376,7 @@ section "Working with a Remote Repository" do
   EOS
 
   slide <<-EOS, :block
-#{BLUE}Clone a repository from a remote
---------------------------------#{COLOR_END}
+#{header("Clone a repository from a remote", 'blue')}
 
 $:~/github>#{WHITE} git clone git@github.com:git/git.git#{COLOR_END}
 Cloning into 'git'...
@@ -423,8 +415,7 @@ $:~/github/git #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch -a#{COLO
   EOS
 
   slide <<-EOS, :block
-#{WHITE}Git Fetch
----------#{COLOR_END}
+#{header("Git Fetch", 'white')}
 Retrieve updates from a remote repo.
     
 # Fetch all remote/branches
@@ -436,8 +427,7 @@ Retrieve updates from a remote repo.
   EOS
 
   slide <<-EOS, :block
-#{WHITE}Git Merge
----------#{COLOR_END}
+#{header("Git Merge", 'white')}
 Straight forward, merge branch into current working branch.
 
 Git merges are VERY fast and VERY cheap.
@@ -474,16 +464,14 @@ Fast-forward
   EOS
 
   slide <<-EOS, :block
-#{WHITE}Git Pull
---------#{COLOR_END}
+#{header("Git Pull", 'white')}
 A #{WHITE}'fetch + merge'#{COLOR_END} in one command.
 
 This is not recommended for standard use when working with an active codebase.
   EOS
 
   slide <<-EOS, :block
-#{BLUE}Perform the pull
-----------------#{COLOR_END}
+#{header("Perform the pull", 'blue')}
 
 $:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>#{WHITE} git pull origin unstable#{COLOR_END}
 remote: Counting objects: 9, done.
@@ -501,8 +489,7 @@ $:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>
   EOS
 
   slide <<-EOS, :block
-#{WHITE}Git log
--------#{COLOR_END}
+#{header("Git log", 'white')}
 
 #{WHITE}git log#{COLOR_END} is a versitile command for viewing local and remote history.
 
@@ -512,8 +499,7 @@ is interactive and serachable.
   EOS
 
   slide <<-EOS, :block
-#{BLUE}View incoming commits from a branch (can be remote)
----------------------------------------------------#{COLOR_END}
+#{header("View incoming commits from a branch (can be remote)", 'blue')}
 
 $:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git fetch origin master#{COLOR_END}
 From github.com:frej/fast-export
@@ -534,8 +520,7 @@ Date:   Tue Apr 22 23:00:44 2014 +0200
   EOS
 
   slide <<-EOS, :block
-#{BLUE}View outgoing commits from a branch (can be remote)
----------------------------------------------------#{COLOR_END}
+#{header("View outgoing commits from a branch (can be remote)", 'blue')}
 
 $:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log origin/master..HEAD#{COLOR_END}
 #{BLUE}commit cda7e0d684652d077c9b5b9c89e13dce8733d4ee#{COLOR_END}
@@ -557,8 +542,7 @@ This will fail if the remote repo is ahead of the local repo.
   EOS
 
   slide <<-EOS, :block
-#{BLUE}Perform the push
-----------------#{COLOR_END}
+#{header("Perform a push", 'blue')}
 
 $:~/github/git-demo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git push github master#{COLOR_END}
 Counting objects: 8, done.
@@ -575,8 +559,7 @@ end
 
 section "Let's Recap... Again" do
   slide <<-EOS, :block
-#{WHITE}Remote Workflow
----------------#{COLOR_END}
+#{header("Remote Workflow", 'blue')}
 
 # Incoming
 1. #{WHITE}git fetch#{COLOR_END} to retrieve changesets from remote.
@@ -591,8 +574,7 @@ end
 
 section "Branching & Tracking" do
   slide <<-EOS, :block
-#{WHITE}Git Branch
-----------#{COLOR_END}
+#{header("Git Branch", 'white')}
 Branching is fast and simple within git.
 
 When a remote branch is checked out on a local copy it forms a tracked pair
@@ -644,8 +626,7 @@ end
 
 section "Git Checkout" do
   slide <<-EOS, :block
-#{WHITE}Git Checkout
-------------#{COLOR_END}
+#{header("Git Checkout", 'white')}
 
 Remember the Swiss Army Knife comment earlier?
 
@@ -676,18 +657,17 @@ end
 
 section "Some fun tools to use ..." do
   slide <<-EOS, :block
-    #{WHITE}The Stash Hash
-    --------------#{COLOR_END}
-    The #{WHITE}git stash#{COLOR_END} command will move unstaged changes to stash hash
-    within the local repo.
+#{header("The Stash Hash", 'white')}
+The #{WHITE}git stash#{COLOR_END} command will move unstaged changes to stash hash
+within the local repo.
 
-    This will reset the repo back to #{RED_BOLD}HEAD#{COLOR_END}. 
+This will reset the repo back to #{RED_BOLD}HEAD#{COLOR_END}. 
 
-    A useful tool when merge conflicts arise or you just want to quickly discard
-    changes. 
+A useful tool when merge conflicts arise or you just want to quickly discard
+changes. 
 
-    The stash hash can be accessed at anytime within git and will always be
-    there unless you drop the stash.
+The stash hash can be accessed at anytime within git and will always be
+there unless you drop the stash.
   EOS
 
   slide <<-EOS, :block
@@ -708,11 +688,9 @@ section "Some fun tools to use ..." do
   EOS
 
   slide <<-EOS, :block
-    #{WHITE}Git Remote
-    ----------#{COLOR_END}
-    An essential git command.
+#{header("Git Remote", 'white')}
 
-    Remote allows you to add and remove remote repo paths.
+Remote allows you to add and remove remote repo paths.
 
   EOS
 
@@ -738,19 +716,18 @@ section "Some fun tools to use ..." do
   EOS
 
   slide <<-EOS, :block
-    #{WHITE}Detached Checkout
-    -----------------#{COLOR_END}
+#{header("Detached Checkout", 'white')}
+
+#{WHITE}git checkout <commit>#{COLOR_END}
     
-    #{WHITE}git checkout <commit>#{COLOR_END}
-    
-    Checkout a commit into a detached state from the commit tree.
+Checkout a commit into a detached state from the commit tree.
 
-    Will not have the ability to commit back to the repo unless given
-    a new branch name.
+Will not have the ability to commit back to the repo unless given
+a new branch name.
 
-    The new branch will be created off of the commit that was detached.
+The new branch will be created off of the commit that was detached.
 
-    Useful for code inspection and experimentation.
+Useful for code inspection and experimentation.
   EOS
 
   slide <<-EOS, :block
