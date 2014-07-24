@@ -22,7 +22,7 @@ section "- The Agenda -" do
   slide <<-EOS, :block
     #{BLUE}The Agenda
     ----------#{COLOR_END}
-    
+
     1. Paradigm Differences
     2. Configuration
     3. Basic Workflow 
@@ -40,10 +40,19 @@ section "Paradigm Differences" do
 1. Cloning - get it all, but not in extracted form
 2. Only sync current working branch (by default)
 3. Keeping branches local is an easy possibility
-4. #{WHITE}hg subrepo#{COLOR_END} #{RED_BOLD}!=#{COLOR_END} #{WHITE}git subomdule#{COLOR_END}
+4. Pre commit staging area
+5. #{WHITE}hg subrepo#{COLOR_END} #{RED_BOLD}!=#{COLOR_END} #{WHITE}git submodule#{COLOR_END}
+  EOS
+
+    slide <<-EOS, :block
+#{BLUE}Between SVN & Git
+-----------------#{COLOR_END}
+1. Pretty much everything.
+2. Trunk/Sandbox vs. Repo/Branches
+3. Branching & Merging are CHEAP
+4. Pre commit staging area
   EOS
 end
-
 
 slide <<-EOS, :center
   It is easy to shoot your foot off with git,
@@ -59,7 +68,7 @@ section "Basic Configuration Files" do
     #{WHITE}Config File (.gitconfig)
     ------------------------#{COLOR_END}
     This is the basic config file that is globally set from the users home
-    directory. (ex. /home/user/.gitconfig)
+    directory. (ex. #{WHITE}/home/user/.gitconfig#{COLOR_END})
 
     You can add attributes to your .gitconfig by either editing the file
     directly or through CLI inputs.
@@ -103,7 +112,7 @@ section "Basic Configuration Files" do
     You can set a global ignore if you like or you can add custom ignore files
     per repo.
 
-    Cool site to generate common .gitignore files:
+    Cool site to generate common #{WHITE}.gitignore#{COLOR_END} files:
     #{WHITE}http://www.gitignore.io/#{COLOR_END}
 
   EOS
@@ -146,7 +155,7 @@ section "The Git Repo Basics" do
     $:~/my_repo/>#{WHITE} git init#{COLOR_END}
     Initialized empty Git repository in /home/derek/my_repo/.git/
     
-    $:~/my_repo/> 
+    $:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}> 
   EOS
 
   slide <<-EOS, :block
@@ -156,13 +165,13 @@ section "The Git Repo Basics" do
 
     Use this to determine what needs to be staged for commit.
 
-    If a file meets a criterion in .gitignore then it will not be displayed in
+    If a file meets a criterion in #{WHITE}.gitignore#{COLOR_END} then it will not be displayed in
     the status message unless it tracked within the repo.
 
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>#{WHITE} git status#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git status#{COLOR_END}
     On branch master
 
       Initial commit
@@ -174,7 +183,7 @@ section "The Git Repo Basics" do
 
     nothing added to commit but untracked files present (use "git add" to track)
 
-    $:~/my_repo/> 
+    $:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}> 
   EOS
 
   slide <<-EOS, :block
@@ -184,11 +193,18 @@ section "The Git Repo Basics" do
 
     Use this to determine what changes will be staged for commit.
 
-    You can designate a specific diff tool in the .gitconfig
+    You can designate a specific diff tool in the #{WHITE}.gitconfig#{COLOR_END}
+
+    #{BLUE}View diff of unstaged changes#{COLOR_END}
+    #{WHITE}git diff#{COLOR_END}
+
+    #{BLUE}View diff of staged changes#{COLOR_END}
+    #{WHITE}git diff --cached#{COLOR_END}
   EOS
 
   slide <<-EOS, :block
-$:~/github/git (git::edit-readme)>#{WHITE} git diff README#{COLOR_END}
+#{BLUE}View diff of unstaged changes#{COLOR_END}
+$:~/github/git #{RED_BOLD}(git::edit-readme)#{COLOR_END}>#{WHITE} git diff README#{COLOR_END}
 #{WHITE}diff --git a/README b/README
 index 15a8e23..e5c9666 100644
 --- a/README
@@ -222,19 +238,36 @@ index 15a8e23..e5c9666 100644
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>#{WHITE} ls#{COLOR_END}
-    hello_git.txt	new-file.pl	new-file.rb
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} ls#{COLOR_END}
+    hello_git.txt	new-file.pl	modified-file.rb
     
-    $:~/my_repo/>#{WHITE} git add new-file.*#{COLOR_END}
-    $:~/my_repo/>#{WHITE} git status#{COLOR_END}
-    On branch master
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git status#{COLOR_END}
+    On branch demo
+    
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+      (commit or discard the untracked or modified content in submodules)
+
+        #{RED}modified:   modified-file.rb#{COLOR_END}
+
+    Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+
+        #{RED}new file:   new-file.pl#{COLOR_END}
+
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}> 
+
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git add new-file.* modified-file.rb#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git status#{COLOR_END}
+    On branch demo
     Changes to be committed:
       (use "git reset HEAD <file>..." to unstage)
     
-        #{GREEN}new file:   new-file.pl
-        new file:   new-file.rb#{COLOR_END}
+        #{GREEN}modified:   modified-file.rb
+        new file:   new-file.pl#{COLOR_END}
 
-    $:~/my_repo/> 
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}> 
   EOS
 
   slide <<-EOS, :block
@@ -251,12 +284,12 @@ Quiting the editor, w/o saving, will cancel the commit.
   EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>#{WHITE} git commit -m "NEATO commit message"#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git commit -m "NEATO commit message"#{COLOR_END}
     [master (root-commit) 0bde0dd] Initial commit
     1 file changed, 1 insertion(+)
     create mode 100644 hello_git.txt
     
-    $:~/my_repo/>#{WHITE} git log#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log#{COLOR_END}
     commit 0bde0dddcc1107344e3bdbabc0cefb5a183c3a47
     Author: Derek Smith <derek@clokwork.net>
     Date:   Wed Jan 9 12:18:28 2013 -0800
@@ -276,28 +309,28 @@ Quiting the editor, w/o saving, will cancel the commit.
    EOS
 
   slide <<-EOS, :block
-    $:~/my_repo/>#{WHITE} ls#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} ls#{COLOR_END}
     hello_git.txt  file_to_delete
     
-    $:~/my_repo/>#{WHITE} git rm file_to_delete #{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git rm file_to_delete #{COLOR_END}
     rm 'file_to_delete'
     
-    $:~/my_repo/>#{WHITE} git status#{COLOR_END}
-    On branch master
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git status#{COLOR_END}
+    On branch demo
     Changes to be committed:
       (use "git reset HEAD <file>..." to unstage)
 
         #{GREEN}deleted:    file_to_delete#{COLOR_END}
     
-    $:~/my_repo/>#{WHITE} git commit -m "Removed file_to_delete from repo"#{COLOR_END}
-    [master 40f4fd4] Removed file_to_delete from repo
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} git commit -m "Removed file_to_delete from repo"#{COLOR_END}
+    [demo 40f4fd4] Removed file_to_delete from repo
      1 file changed, 1 deletion(-)
      delete mode 100644 file_to_delete
     
-    $:~/my_repo/>#{WHITE} ls#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}>#{WHITE} ls#{COLOR_END}
     hello_git.txt
     
-    $:~/my_repo/> 
+    $:~/my_repo/ #{RED_BOLD}(git::demo)#{COLOR_END}> 
   EOS
 
   slide <<-EOS, :block
@@ -323,9 +356,30 @@ section "Let's Recap" do
   EOS
 end
 
-section "Working with a Repository" do
-  slide <<-EOS, :center
-    THIS IS A PLACE HOLDER
+section "Working with a Remote Repository" do
+  slide <<-EOS, :block
+                 -___________-
+                #{RED_BOLD}(#{COLOR_END}/     _     \\#{RED_BOLD})#{COLOR_END}
+                /_____(#{BLUE}O#{COLOR_END})_____\\
+                // / / | \\ \\ \\\\
+               =================
+               // / | | | | \\ \\\\      "COLLABORATE! COLLABORATE!"
+              ===================    /
+             //// || || || || \\\\\\\\
+             |||| || || || || ||||
+            /---___-----------,---\\
+            |  /   \\         -o-  |
+            /  \\___/          '   \\
+            +---------------------+
+           /_   __    ___    __   _\\
+          (__) (__)  (___)  (__) (__)
+          |_    __    ___    __    _|
+         (__)  (__)  (___)  (__)  (__) 
+         /_    ___    ___    ___    _\\ 
+        (__)  (___)  (___)  (___)  (__) 
+        |_     ___    ___    ___     _| 
+       (__)   (___)  (___)  (___)   (__)   
+       /_______________________________\\
   EOS
 
   slide <<-EOS, :block
@@ -347,17 +401,17 @@ git   scrimps
 
   slide <<-EOS, :block
 $:~/github>#{WHITE} cd git#{COLOR_END}
-$:~/github/git (git::master)>#{WHITE} git status#{COLOR_END}
+$:~/github/git #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git status#{COLOR_END}
 On branch master
 Your branch is up-to-date with 'origin/master'.
 
 nothing to commit, working directory clean
 
-$:~/github/git (git::master)>#{WHITE} git remote -v#{COLOR_END}
+$:~/github/git #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git remote -v#{COLOR_END}
 origin  git@github.com:git/git.git (fetch)
 origin  git@github.com:git/git.git (push)
 
-$:~/github/git (git::master)>#{WHITE} git branch -a#{COLOR_END}
+$:~/github/git #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch -a#{COLOR_END}
 #{GREEN}* master#{COLOR_END}
   #{RED}remotes/origin/HEAD -> origin/master
   remotes/origin/maint
@@ -365,48 +419,6 @@ $:~/github/git (git::master)>#{WHITE} git branch -a#{COLOR_END}
   remotes/origin/next
   remotes/origin/pu
   remotes/origin/todo#{COLOR_END}
-
-  EOS
-
-  slide <<-EOS, :block
-#{WHITE}Git log
--------#{COLOR_END}
-
-#{WHITE}git log#{COLOR_END} is a versitile command for viewing local and remote history.
-
-Standard command will open the commit history for the working branch that
-is interactive and serachable.
-
-  EOS
-
-  slide <<-EOS, :block
-#{BLUE}View incoming commits from a branch (can be remote)
----------------------------------------------------#{COLOR_END}
-
-$:~/github/fast-export (git::master)>#{WHITE} git log HEAD..origin/master#{COLOR_END}
-#{BLUE}commit 1d85321bdb35cfe7c056ca4c6249d252348a1fec#{COLOR_END}
-Author: Piotr Święcicki <swietopel@gmail.com>
-Date:   Tue Apr 22 23:00:44 2014 +0200
-
-    Annotate commits with the hg hash as git notes in the hg namespace
-
-    If the --hg-hash argument is given, the converted commits are
-    annotated with the original hg hash as a git note in the "hg"
-    namespace.
-
-    The notes can be shown by git log using the "--notes=hg" argument.
-  EOS
-
-  slide <<-EOS, :block
-#{BLUE}View outgoing commits from a branch (can be remote)
----------------------------------------------------#{COLOR_END}
-
-$:~/github/fast-export (git::master)>#{WHITE} git log origin/master..HEAD#{COLOR_END}
-#{BLUE}commit cda7e0d684652d077c9b5b9c89e13dce8733d4ee#{COLOR_END}
-Author: Derek Smith <derek@clokwork.net>
-Date:   Mon Jul 21 21:52:02 2014 -0500
-
-    Added a new .tmp file for some reason
 
   EOS
 
@@ -439,26 +451,32 @@ Use #{WHITE}--no-ff#{COLOR_END} to have a merge commit created.
   EOS
 
   slide <<-EOS, :block
-# Perform the fetch 
-$:~/github/redis/>#{WHITE} git fetch origin unstable#{COLOR_END}
-From git://github.com/antirez/redis
-  * branch            unstable   -> FETCH_HEAD
+#{BLUE}Perform the fetch#{COLOR_END}
+$:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>#{WHITE} git fetch origin unstable#{COLOR_END}
+From github.com:antirez/redis
+ * branch            unstable   -> FETCH_HEAD
 
-# Then merge the fetched code
-$:~/github/redis/>#{WHITE} git merge origin/unstable#{COLOR_END}
-Updating be6cbd3..d7740fc
+#{BLUE}Check the status#{COLOR_END}
+$:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>#{WHITE} git status#{COLOR_END}
+On branch unstable
+Your branch is behind 'origin/unstable' by 3 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+nothing to commit, working directory clean
+
+#{BLUE}Perform the merge#{COLOR_END}
+$:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>#{WHITE} git merge origin unstable#{COLOR_END}
+Updating b9bb7e2..7eb47ae
 Fast-forward
-  CONTRIBUTING                                                   |    7 #{GREEN}++#{COLOR_END}
-  COPYING                                                        |    2 #{GREEN}+#{COLOR_END}#{RED}-#{COLOR_END}
-   ...
-  utils/install_server.sh                                        |    2 #{GREEN}+#{COLOR_END}
-  132 files changed, 4403 insertions(+), 1007 deletions(-)
+ src/hyperloglog.c |  12 #{GREEN}+++++++++#{COLOR_END}#{RED}--#{COLOR_END}
+ src/util.c        | 102 #{GREEN}++++++++++++++++++++++++++++++++++++++++++#{COLOR_END}#{RED}----------#{COLOR_END}
+ 2 files changed, 91 insertions(+), 23 deletions(-)
   EOS
 
   slide <<-EOS, :block
 #{WHITE}Git Pull
 --------#{COLOR_END}
-A 'fetch + merge' in one command.
+A #{WHITE}'fetch + merge'#{COLOR_END} in one command.
 
 This is not recommended for standard use when working with an active codebase.
   EOS
@@ -467,7 +485,7 @@ This is not recommended for standard use when working with an active codebase.
 #{BLUE}Perform the pull
 ----------------#{COLOR_END}
 
-$:~/github/redis/>#{WHITE} git pull origin unstable#{COLOR_END}
+$:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>#{WHITE} git pull origin unstable#{COLOR_END}
 remote: Counting objects: 9, done.
 remote: Compressing objects: 100% (5/5), done.
 remote: Total 7 (delta 4), reused 5 (delta 2)
@@ -478,6 +496,55 @@ Updating 776d987..a785986
 Fast-forward
   README.markdown |   28 #{GREEN}++++++++++++++++++++++++++++#{COLOR_END}
   1 file changed, 28 insertions(+)
+
+$:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>
+  EOS
+
+  slide <<-EOS, :block
+#{WHITE}Git log
+-------#{COLOR_END}
+
+#{WHITE}git log#{COLOR_END} is a versitile command for viewing local and remote history.
+
+Standard command will open the commit history for the working branch that
+is interactive and serachable.
+
+  EOS
+
+  slide <<-EOS, :block
+#{BLUE}View incoming commits from a branch (can be remote)
+---------------------------------------------------#{COLOR_END}
+
+$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git fetch origin master#{COLOR_END}
+From github.com:frej/fast-export
+ * branch            master     -> FETCH_HEAD
+
+$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log HEAD..origin/master#{COLOR_END}
+#{BLUE}commit 1d85321bdb35cfe7c056ca4c6249d252348a1fec#{COLOR_END}
+Author: Piotr Święcicki <swietopel@gmail.com>
+Date:   Tue Apr 22 23:00:44 2014 +0200
+
+    Annotate commits with the hg hash as git notes in the hg namespace
+
+    If the --hg-hash argument is given, the converted commits are
+    annotated with the original hg hash as a git note in the "hg"
+    namespace.
+
+    The notes can be shown by git log using the "--notes=hg" argument.
+  EOS
+
+  slide <<-EOS, :block
+#{BLUE}View outgoing commits from a branch (can be remote)
+---------------------------------------------------#{COLOR_END}
+
+$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log origin/master..HEAD#{COLOR_END}
+#{BLUE}commit cda7e0d684652d077c9b5b9c89e13dce8733d4ee#{COLOR_END}
+Author: Derek Smith <derek@clokwork.net>
+Date:   Mon Jul 21 21:52:02 2014 -0500
+
+    Added a new .tmp file for some reason
+
+$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>
   EOS
 
   slide <<-EOS, :block
@@ -493,7 +560,7 @@ This will fail if the remote repo is ahead of the local repo.
 #{BLUE}Perform the push
 ----------------#{COLOR_END}
 
-$:~/github/git-demo/>#{WHITE} git push github master#{COLOR_END}
+$:~/github/git-demo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git push github master#{COLOR_END}
 Counting objects: 8, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (5/5), done.
@@ -501,6 +568,8 @@ Writing objects: 100% (5/5), 4.00 KiB, done.
 Total 5 (delta 3), reused 0 (delta 0)
 To git@github.com:clok/git-tuts.git
     20f47b7..9b404fb  master -> master
+
+$:~/github/git-demo/ #{RED_BOLD}(git::master)#{COLOR_END}>
   EOS
 end
 
@@ -538,15 +607,15 @@ a tracked branch on the remote you pushed to.
 
   slide <<-EOS, :block
     # Create a new branch named 'features'
-    $:~/my_repo/ (git::master)>#{WHITE} git branch features#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch features#{COLOR_END}
     
     # List all local branches
-    $:~/my_repo/ (git::master)>#{WHITE} git branch#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch#{COLOR_END}
       feature
     #{GREEN}* master#{COLOR_END}
 
     # List all remote branches
-    $:~/dev/malarkey (git::master)>#{WHITE} git branch -r#{COLOR_END}
+    $:~/dev/malarkey #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch -r#{COLOR_END}
       #{RED}stash/master
       stash/v4
       origin/master
@@ -556,13 +625,13 @@ a tracked branch on the remote you pushed to.
 
   slide <<-EOS, :block
 
-$:~/my_repo/ (git::master)>#{WHITE} git remote -v#{COLOR_END}
+$:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git remote -v#{COLOR_END}
 origin  git@github.com:clok/scrimps.git (fetch)
 origin  git@github.com:clok/scrimps.git (push)
 stash ssh://git@stash.phmgmt.com:7999/~derek/scrimps.git (fetch)
 stash ssh://git@stash.phmgmt.com:7999/~derek/scrimps.git (push)
 
-$:~/my_repo/ (git::master)>#{WHITE} git branch -vv#{COLOR_END}
+$:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch -vv#{COLOR_END}
   demo          2ca62eb [#{BLUE}stash/demo#{COLOR_END}: behind 1] added sql hackery
 #{GREEN}* master#{COLOR_END}        175fa5f [#{BLUE}origin/master#{COLOR_END}] simplified autoGit and added a new script
   bugfix        29017c1 fixed branch bug
