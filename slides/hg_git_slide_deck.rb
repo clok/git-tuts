@@ -597,7 +597,7 @@ a tracked branch on the remote you pushed to.
     #{GREEN}* master#{COLOR_END}
 
     # List all remote branches
-    $:~/dev/malarkey #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch -r#{COLOR_END}
+    $:~/my_repo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch -r#{COLOR_END}
       #{RED}stash/master
       stash/v4
       origin/master
