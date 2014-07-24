@@ -68,7 +68,7 @@ section "Basic Configuration Files" do
     #{WHITE}Config File (.gitconfig)
     ------------------------#{COLOR_END}
     This is the basic config file that is globally set from the users home
-    directory. (ex. /home/user/.gitconfig)
+    directory. (ex. #{WHITE}/home/user/.gitconfig#{COLOR_END})
 
     You can add attributes to your .gitconfig by either editing the file
     directly or through CLI inputs.
@@ -112,7 +112,7 @@ section "Basic Configuration Files" do
     You can set a global ignore if you like or you can add custom ignore files
     per repo.
 
-    Cool site to generate common .gitignore files:
+    Cool site to generate common #{WHITE}.gitignore#{COLOR_END} files:
     #{WHITE}http://www.gitignore.io/#{COLOR_END}
 
   EOS
@@ -165,7 +165,7 @@ section "The Git Repo Basics" do
 
     Use this to determine what needs to be staged for commit.
 
-    If a file meets a criterion in .gitignore then it will not be displayed in
+    If a file meets a criterion in #{WHITE}.gitignore#{COLOR_END} then it will not be displayed in
     the status message unless it tracked within the repo.
 
   EOS
@@ -193,10 +193,17 @@ section "The Git Repo Basics" do
 
     Use this to determine what changes will be staged for commit.
 
-    You can designate a specific diff tool in the .gitconfig
+    You can designate a specific diff tool in the #{WHITE}.gitconfig#{COLOR_END}
+
+    #{BLUE}View diff of unstaged changes#{COLOR_END}
+    #{WHITE}git diff#{COLOR_END}
+
+    #{BLUE}View diff of staged changes#{COLOR_END}
+    #{WHITE}git diff --cached#{COLOR_END}
   EOS
 
   slide <<-EOS, :block
+#{BLUE}View diff of unstaged changes#{COLOR_END}
 $:~/github/git #{RED_BOLD}(git::edit-readme)#{COLOR_END}>#{WHITE} git diff README#{COLOR_END}
 #{WHITE}diff --git a/README b/README
 index 15a8e23..e5c9666 100644
@@ -478,7 +485,7 @@ This is not recommended for standard use when working with an active codebase.
 #{BLUE}Perform the pull
 ----------------#{COLOR_END}
 
-$:~/github/redis/>#{WHITE} git pull origin unstable#{COLOR_END}
+$:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>#{WHITE} git pull origin unstable#{COLOR_END}
 remote: Counting objects: 9, done.
 remote: Compressing objects: 100% (5/5), done.
 remote: Total 7 (delta 4), reused 5 (delta 2)
@@ -489,6 +496,8 @@ Updating 776d987..a785986
 Fast-forward
   README.markdown |   28 #{GREEN}++++++++++++++++++++++++++++#{COLOR_END}
   1 file changed, 28 insertions(+)
+
+$:~/github/redis/ #{RED_BOLD}(git::unstable)#{COLOR_END}>
   EOS
 
   slide <<-EOS, :block
@@ -509,6 +518,7 @@ is interactive and serachable.
 $:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git fetch origin master#{COLOR_END}
 From github.com:frej/fast-export
  * branch            master     -> FETCH_HEAD
+
 $:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log HEAD..origin/master#{COLOR_END}
 #{BLUE}commit 1d85321bdb35cfe7c056ca4c6249d252348a1fec#{COLOR_END}
 Author: Piotr Święcicki <swietopel@gmail.com>
@@ -534,6 +544,7 @@ Date:   Mon Jul 21 21:52:02 2014 -0500
 
     Added a new .tmp file for some reason
 
+$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>
   EOS
 
   slide <<-EOS, :block
@@ -549,7 +560,7 @@ This will fail if the remote repo is ahead of the local repo.
 #{BLUE}Perform the push
 ----------------#{COLOR_END}
 
-$:~/github/git-demo/>#{WHITE} git push github master#{COLOR_END}
+$:~/github/git-demo/ #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git push github master#{COLOR_END}
 Counting objects: 8, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (5/5), done.
@@ -557,6 +568,8 @@ Writing objects: 100% (5/5), 4.00 KiB, done.
 Total 5 (delta 3), reused 0 (delta 0)
 To git@github.com:clok/git-tuts.git
     20f47b7..9b404fb  master -> master
+
+$:~/github/git-demo/ #{RED_BOLD}(git::master)#{COLOR_END}>
   EOS
 end
 
