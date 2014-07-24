@@ -54,7 +54,6 @@ section "Paradigm Differences" do
   EOS
 end
 
-
 slide <<-EOS, :center
   It is easy to shoot your foot off with git,
   but also easy to revert to a previous foot
@@ -353,8 +352,8 @@ end
 section "Working with a Remote Repository" do
   slide <<-EOS, :block
                  -___________-
-                (/     _     \\)
-                /_____(O)_____\\
+                #{RED_BOLD}(#{COLOR_END}/     _     \\#{RED_BOLD})#{COLOR_END}
+                /_____(#{BLUE}O#{COLOR_END})_____\\
                 // / / | \\ \\ \\\\
                =================
                // / | | | | \\ \\\\      "COLLABORATE! COLLABORATE!"
@@ -417,48 +416,6 @@ $:~/github/git #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git branch -a#{COLO
   EOS
 
   slide <<-EOS, :block
-#{WHITE}Git log
--------#{COLOR_END}
-
-#{WHITE}git log#{COLOR_END} is a versitile command for viewing local and remote history.
-
-Standard command will open the commit history for the working branch that
-is interactive and serachable.
-
-  EOS
-
-  slide <<-EOS, :block
-#{BLUE}View incoming commits from a branch (can be remote)
----------------------------------------------------#{COLOR_END}
-
-$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log HEAD..origin/master#{COLOR_END}
-#{BLUE}commit 1d85321bdb35cfe7c056ca4c6249d252348a1fec#{COLOR_END}
-Author: Piotr Święcicki <swietopel@gmail.com>
-Date:   Tue Apr 22 23:00:44 2014 +0200
-
-    Annotate commits with the hg hash as git notes in the hg namespace
-
-    If the --hg-hash argument is given, the converted commits are
-    annotated with the original hg hash as a git note in the "hg"
-    namespace.
-
-    The notes can be shown by git log using the "--notes=hg" argument.
-  EOS
-
-  slide <<-EOS, :block
-#{BLUE}View outgoing commits from a branch (can be remote)
----------------------------------------------------#{COLOR_END}
-
-$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log origin/master..HEAD#{COLOR_END}
-#{BLUE}commit cda7e0d684652d077c9b5b9c89e13dce8733d4ee#{COLOR_END}
-Author: Derek Smith <derek@clokwork.net>
-Date:   Mon Jul 21 21:52:02 2014 -0500
-
-    Added a new .tmp file for some reason
-
-  EOS
-
-  slide <<-EOS, :block
 #{WHITE}Git Fetch
 ---------#{COLOR_END}
 Retrieve updates from a remote repo.
@@ -512,7 +469,7 @@ Fast-forward
   slide <<-EOS, :block
 #{WHITE}Git Pull
 --------#{COLOR_END}
-A 'fetch + merge' in one command.
+A #{WHITE}'fetch + merge'#{COLOR_END} in one command.
 
 This is not recommended for standard use when working with an active codebase.
   EOS
@@ -532,6 +489,51 @@ Updating 776d987..a785986
 Fast-forward
   README.markdown |   28 #{GREEN}++++++++++++++++++++++++++++#{COLOR_END}
   1 file changed, 28 insertions(+)
+  EOS
+
+  slide <<-EOS, :block
+#{WHITE}Git log
+-------#{COLOR_END}
+
+#{WHITE}git log#{COLOR_END} is a versitile command for viewing local and remote history.
+
+Standard command will open the commit history for the working branch that
+is interactive and serachable.
+
+  EOS
+
+  slide <<-EOS, :block
+#{BLUE}View incoming commits from a branch (can be remote)
+---------------------------------------------------#{COLOR_END}
+
+$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git fetch origin master#{COLOR_END}
+From github.com:frej/fast-export
+ * branch            master     -> FETCH_HEAD
+$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log HEAD..origin/master#{COLOR_END}
+#{BLUE}commit 1d85321bdb35cfe7c056ca4c6249d252348a1fec#{COLOR_END}
+Author: Piotr Święcicki <swietopel@gmail.com>
+Date:   Tue Apr 22 23:00:44 2014 +0200
+
+    Annotate commits with the hg hash as git notes in the hg namespace
+
+    If the --hg-hash argument is given, the converted commits are
+    annotated with the original hg hash as a git note in the "hg"
+    namespace.
+
+    The notes can be shown by git log using the "--notes=hg" argument.
+  EOS
+
+  slide <<-EOS, :block
+#{BLUE}View outgoing commits from a branch (can be remote)
+---------------------------------------------------#{COLOR_END}
+
+$:~/github/fast-export #{RED_BOLD}(git::master)#{COLOR_END}>#{WHITE} git log origin/master..HEAD#{COLOR_END}
+#{BLUE}commit cda7e0d684652d077c9b5b9c89e13dce8733d4ee#{COLOR_END}
+Author: Derek Smith <derek@clokwork.net>
+Date:   Mon Jul 21 21:52:02 2014 -0500
+
+    Added a new .tmp file for some reason
+
   EOS
 
   slide <<-EOS, :block
